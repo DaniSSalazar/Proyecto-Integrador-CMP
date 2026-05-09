@@ -1,4 +1,4 @@
-# Proyecto Integrador — Detección de Preguntas Acusatorias en Procesos de Contratación Pública del Ecuador
+# Proyecto Integrador — Diseño e implementación de un índice de riesgo de corrupción basado en preguntas acusatorias del portal de contratación pública ecuatoriano para procesos de Subasta Inversa Electrónica
 
 > SOCE / Subasta Inversa Electrónica (SIE)
 
