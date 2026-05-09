@@ -9,7 +9,7 @@ calibrado, y selecciona el mejor modelo. Tiene las secciones lógicas:
 - 80/20 estratificado → alignment_set_80.csv y final_test_set_20.csv.
 - Sub-split 80/20 sobre el 80% → alignment_set_dev.csv y alignment_set_val.csv (para iterar prompts).
 
-2. Calibración del prompt del LLM-juez
+2.1 Calibración del prompt del LLM-juez
 
 - Tiene el prompt 15 activo: un SYSTEM_PROMPT en español muy extenso
 (reglas, patrones ACUSATORIA / NO_ACUSATORIA, distinciones finas, ~60 ejemplos).
@@ -18,6 +18,35 @@ calibrado, y selecciona el mejor modelo. Tiene las secciones lógicas:
 - evaluate_llm_judge() reporta matriz de confusión, F1/precision/recall vs etiqueta humana.
 - Corre la evaluación sobre alignment_set_val → llm_alignment_results_val_prompt15.csv.
 - Análisis de falsos positivos (longitud de pregunta, términos acusatorios frecuentes).
+
+2.2 Búsqueda del mejor threshold de cada modelo de probabilidad (ID_prob_lr, ID_prob_rf, ID_prob_rf_aug, ID_prob_weighted)
+
+    Esta calibración de thresholds en se hizo en alignment_set_val (vs juez LLM)
+
+    - Genera embeddings de alignment_set_val.csv con text-embedding-3-large
+    (alignment_set_val_embeddings_text-embedding-3-large.csv).
+    - Re-entrena LR, RF, RF_aug con sus mismos training sets y calcula los 4 índices probabilísticos
+    (ID_prob_lr / rf / rf_aug / weighted) sobre alignment_set_val
+    (alignment_val_prob_scores.csv).
+    - Para cada índice prueba 4 estrategias de threshold contra llm_label:
+    pr_curve_best_f1, grid_0.01_0.99, percentile_match_llm_rate, top_k=K_positivos_LLM.
+    - Selecciona el ganador por modelo con criterio F1 → Cohen's κ → Precision (todos vs LLM)
+    y reporta también el cruce con la etiqueta humana usando el mismo threshold.
+    - Salidas: alignment_val_threshold_per_strategy.csv (16 filas, 4×4) y
+    alignment_val_best_threshold_per_model.csv (4 filas, una por índice).
+    - Resultado: la estrategia ganadora para los 4 modelos fue pr_curve_best_f1.
+    Thresholds calibrados (vs LLM, sobre alignment_set_val):
+        · ID_prob_rf       → thr=0.5400  | F1=0.906  P=1.000  R=0.828  κ=0.902  AP=0.883  AUC=0.969
+                            (vs humano: F1=1.000  P=1.000  R=1.000)
+        · ID_prob_weighted → thr=0.5870  | F1=0.889  P=0.960  R=0.828  κ=0.885  AP=0.878  AUC=0.970
+                            (vs humano: F1=0.980  P=0.960  R=1.000)
+        · ID_prob_rf_aug   → thr=0.9700  | F1=0.885  P=1.000  R=0.793  κ=0.881  AP=0.871  AUC=0.966
+                            (vs humano: F1=0.979  P=1.000  R=0.958)
+        · ID_prob_lr       → thr=0.6071  | F1=0.923  P=0.923  R=0.828  κ=0.868  AP=0.859  AUC=0.969
+                            (vs humano: F1=0.960  P=0.923  R=1.000)
+    - Lectura: ID_prob_rf lidera en alineación con el LLM y mantiene F1=1.0 vs humano,
+    seguido muy de cerca por ID_prob_weighted; los 4 modelos quedan por encima de F1=0.87 y κ≈0.87.
+    Los thresholds calibrados quedan listos para aplicarse a final_test_set_20.
 
 3. Generación de los 7 índices ML sobre el test set 20% (Cells 18-24)
 
