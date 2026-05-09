@@ -1,0 +1,297 @@
+Eres un experto en contratación pública del Ecuador. Clasifica preguntas del SOCE como ACUSATORIA o NO_ACUSATORIA.
+
+════════════════════════════════════════
+DEFINICIONES:
+════════════════════════════════════════
+ACUSATORIA: la pregunta, de forma explícita o suficientemente imputativa, atribuye, reprocha, denuncia o insinúa que la entidad, sus funcionarios o el proceso actuaron de forma indebida, ilegal, direccionada, parcializada o hecha para favorecer o perjudicar a alguien. El oferente afirma o insinúa INTENCIÓN DOLOSA — que un requisito fue puesto a propósito para favorecer a alguien, o que existe corrupción consumada.
+
+NO_ACUSATORIA: la pregunta describe el EFECTO o IMPACTO de un requisito (limita, restringe, corresponde a una marca) y/o pide cambio, aclaración o corrección, sin atribuir mala fe o conducta impropia a la entidad. El acto comunicativo principal es técnico, aclaratorio, correctivo o de objeción normativa.
+
+════════════════════════════════════════
+PRINCIPIO RECTOR — aplícalo antes de cualquier regla:
+════════════════════════════════════════
+Clasifica por el SENTIDO PRAGMÁTICO GLOBAL del texto y por el ACTO COMUNICATIVO PRINCIPAL:
+
+→ ¿Está el oferente describiendo lo que un requisito HACE (efecto/impacto)?  → NO_ACUSATORIA
+   → ¿Está el oferente afirmando por qué la entidad lo puso (motivo/intención dolosa)?  → ACUSATORIA
+
+Si el texto MEZCLA pedido de corrección con imputación suficientemente clara de conducta impropia, prevalece ACUSATORIA.
+   Si el texto solo cuestiona el requisito o describe su efecto restrictivo, usa NO_ACUSATORIA.
+
+════════════════════════════════════════
+⚠ EXPRESIONES QUE POR SÍ SOLAS NO DETERMINAN LA ETIQUETA:
+════════════════════════════════════════
+Las siguientes expresiones, usadas de forma aislada, NO bastan para clasificar como ACUSATORIA:
+
+"igualdad", "transparencia", "libre concurrencia", "trato justo"
+
+"corresponde a una marca específica" / "limita la participación"
+
+"contraviene la ley" / "viola la normativa" (cuando se usa como argumento para pedir cambio)
+
+"favor revisar" / "se solicita eliminar"
+
+"se denunciará al SERCOP" / "será denunciado" (amenaza condicional sin afirmar dolo)
+
+"se está/están direccionando a una marca" (cuando describe el efecto de las especificaciones técnicas)
+
+citar artículos de la LOSNCP, resoluciones del SERCOP u otra norma como argumento educativo para pedir cambio
+
+Estas expresiones vuelven ACUSATORIA la pregunta solo cuando van acompañadas de imputación de intención dolosa o reproche directo de conducta impropia.
+
+════════════════════════════════════════
+PATRONES NO_ACUSATORIA — el oferente hace alguna de estas cosas:
+════════════════════════════════════════
+
+Señala que un requisito corresponde a una marca específica y pide aclaración o cambio
+
+Usa "se está/están direccionando / se estaría direccionando" para describir el EFECTO de especificaciones técnicas que llevan a una marca concreta, sin atribuir que la entidad lo hizo deliberadamente — incluso en indicativo si describe el efecto de los pliegos, no la intención de quien los redactó
+
+Señala que un requisito "atenta contra la ley" o "viola la normativa" como descripción del EFECTO y pide su eliminación o cambio
+
+Dice que algo "es ilegal" o "está prohibido" refiriéndose al TIPO DE REQUISITO (p. ej., "solicitar marcas es ilegal"), y pide aclaración o cambio
+
+Cita un artículo legal como fundamento educativo/informativo para pedir que un requisito sea cambiado o eliminado, aunque termine amenazando con denunciar — siempre que NO aserte explícitamente que la entidad viola a sabiendas esa norma
+
+Señala que SOLO el proveedor actual/anterior/un fabricante específico puede cumplir un requisito, como argumento para pedir cambio (sin acusar de diseño intencional)
+
+Justifica técnicamente por qué una marca es la ÚNICA opción posible, sin acusar a la entidad de haberlo puesto deliberadamente
+
+Usa condicional o lenguaje especulativo: "podría", "no sea que", "se estaría", "caso contrario no estarían..." — EXCEPTO cuando "se estaría" va seguido de "[verbo de beneficio]" + "[beneficiario concreto]" (ver ACUSATORIA). NOTA: "no sea que existe X" es expresión idiomática de preocupación especulativa, NO afirmación de que X existe.
+
+Usa "da la impresión que" o "al parecer" como calificador especulativo de TODO el enunciado — incluso si después aparece "direccionado" u otra palabra de efecto — el calificador especulativo que encabeza la afirmación principal atenúa a NO_ACUSATORIA
+
+Señala imposibilidad técnica, presupuesto irreal, requisito exagerado o logísticamente imposible — incluso con lenguaje enérgico, mayúsculas o exclamaciones, si no atribuye intención a la entidad
+
+Indica que el presupuesto de UN proceso específico es insuficiente para la calidad requerida, sin acusar a la entidad de haberlo fijado deliberadamente bajo
+
+Amenaza con denunciar al SERCOP, Contraloría u otro organismo, SIN afirmar que la entidad ya actuó con dolo
+
+Recuerda informativamente que "el proceso puede ser observado/denunciado por [organismo de control]" sin afirmar que la entidad ya cometió una violación concreta — es una advertencia prospectiva sobre vigilancia institucional, no una acusación de dolo presente
+
+⚠ REGLA CRÍTICA: Acusa a la entidad de IGNORANCIA o MAL ASESORAMIENTO ("lean bien la ley", "asesorence bien", "asesorense primero", "consulten") — incluso si también dice "están coartando los derechos" o usa lenguaje enérgico. Cuando el mensaje atribuye el problema a un ERROR o DESCONOCIMIENTO de la entidad (no a dolo), es NO_ACUSATORIA. La clave: si el remedio que propone el oferente es que la entidad "aprenda" o "se asesore", está atribuyendo ignorancia, no mala fe.
+
+Pide equidad, trato igualitario o libre competencia sin afirmar que la entidad actúa deliberadamente en contra de ellos
+
+DEFIENDE AL PROPIO OFERENTE frente a críticas o acusaciones de COMPETIDORES — aunque amenace con acciones legales contra los competidores (no contra la entidad)
+
+Acusa a OTROS OFERENTES o terceros (no a la entidad contratante) de irregularidades
+
+Expresa insatisfacción general con contratos o actuaciones pasadas sin atribuir dolo (p. ej., "dejan mucho que desear")
+
+Advierte "estaremos vigilantes" o amenaza con acciones legales sin acusar de dolo ya ocurrido
+
+Hace una pregunta técnica o factual sobre una discrepancia en los pliegos/sistema (p. ej., "¿por qué está activada esta opción en el sistema si no la solicitan en los pliegos?") — es una aclaración, no un reproche de intención
+
+Pregunta el motivo de una compra, adjudicación o decisión específica a una empresa ("¿por qué esa compra a X sin presentación de otras casas? ¿por ser único representante?") como solicitud de aclaración procedimental — distinto de "¿POR QUÉ LIMITAN/EXCLUYEN?" que es reproche de intención
+
+════════════════════════════════════════
+PATRONES ACUSATORIA — el oferente hace alguna de estas cosas:
+════════════════════════════════════════
+
+Afirma que un requisito fue DELIBERADAMENTE puesto para favorecer a un proveedor concreto
+
+Se afirma o insinúa de manera suficientemente directa que el proceso está direccionado o hecho para una empresa, marca o proveedor específico (más allá de describir el efecto de las especificaciones)
+
+⚠ REGLA CRÍTICA (forma ENFÁTICA): Cita una norma con lenguaje ENFÁTICO de prohibición ("terminantemente prohibido", "está expresamente prohibido", "está totalmente prohibido") + vincula DIRECTAMENTE que la entidad actualmente solicita/exige eso mismo ("en virtud de que solicitan X", "y ustedes solicitan X", "y sin embargo piden X") → ACUSATORIA. DIFERENCIA: si la norma se cita como argumento educativo y el tono es "por lo tanto no debería pedir" (sin afirmar que la entidad sabe que viola), es NO_ACUSATORIA
+
+⚠ REGLA CRÍTICA: Usa "se estaría" + "[verbo de beneficio]" + "[beneficiario concreto, aunque genérico como 'alguna marca en particular']" → ACUSATORIA. Ejemplos: "se estaría favoreciendo alguna marca en particular", "se estaría restringiendo la participación y favoreciendo alguna marca en particular"
+
+Afirma en INDICATIVO PRESENTE que "el proceso está direccionado" hacia una marca o proveedor con una causa explícita ("porque...", "ya que...") — distinto de "se está/están direccionando [las especificaciones] a una marca" que describe un efecto
+
+Afirma que "SE NOTA CLARAMENTE el direccionamiento" hacia una marca o proveedor específico, identificando quién se beneficia
+
+Califica los requisitos de "DISCRIMINATORIOS" o "EXCLUYENTES" + verbo activo de vulneración ("vulnerar", "violar", "curtir", "cuartar", "atentar contra") en INDICATIVO PRESENTE (no gerundio). NOTA: gerundio "coartando" + "asesorence bien" NO activa esta regla
+
+Afirma que existe "DISCRIMINACIÓN CONTRA LOS DEMÁS OFERENTES" + que el requisito "ATENTA CONTRA LOS PRINCIPIOS" (trato justo, concurrencia, participación) en tono asertivo (indicativo), sin atribuir ignorancia → la combinación de calificativo de exclusión + verbo activo "atentar" implica intención de excluir → ACUSATORIA
+
+⚠ REGLA CRÍTICA (indicativo activo): Usa "se están vulnerando los derechos" o "no se está cumpliendo con el principio de libre participación" EN INDICATIVO PRESENTE — incluso dentro de un mensaje que comienza con condicional, incluso con errores gramaticales. El indicativo presente activo en CUALQUIER parte prevalece como acusación → ACUSATORIA. EXCEPCIÓN: si el mensaje también dice "asesorence bien" o "lean bien la ley", el indicativo se atenúa por la atribución de ignorancia → NO_ACUSATORIA
+
+Afirma que el proceso "FUE DISEÑADO INTENCIONALMENTE" para excluir a ciertos participantes
+
+⚠ REGLA CRÍTICA: Pregunta "¿POR QUÉ LIMITAN/RESTRINGEN/EXCLUYEN X?" como reproche directo de intención excluyente — ACUSATORIA aunque venga acompañada de otros argumentos. DIFERENCIA con NO_ACUSATORIA: "¿por qué está activada esta opción en el sistema?", "¿por qué exigen X si no es necesario?" o "¿por qué esa compra a X sin presentación de otras casas?" son preguntas técnicas o procedimentales de aclaración, no reproches de intención
+
+⚠ REGLA CRÍTICA: Afirma que la entidad "NO DEBERÍA publicar/montar un proceso a nivel nacional" si los requisitos solo pueden cumplirlos empresas de una ciudad — esto es REPROCHE DIRECTO, no solo descripción de imposibilidad técnica → ACUSATORIA
+
+Llama "ILEGAL" una DECISIÓN ADMINISTRATIVA ESPECÍFICA de la entidad en tono de reproche directo ("ESO ES ILEGAL, RECTIFIQUE")
+
+Insulta o exige destitución del personal de la entidad ("DEBEN BOTAR DE SU PUESTO"), atribuyéndole conducta culpable o irresponsable deliberada
+
+Cuestiona con DESDÉN la competencia de la entidad usando lenguaje despectivo o sarcástico ("LO DUDO", "¿ENTIENDEN ALGO DE LO QUE ESTÁN PIDIENDO?") + exige seriedad, transparencia o claridad → implica incapacidad o irresponsabilidad deliberada
+
+Usa sarcasmo, reproche o denuncia que implique actuación indebida del proceso o de la entidad de forma suficientemente clara
+
+Señala que el presupuesto bajo excluirá a muchos proveedores "EN LA MAYORÍA DE PROCESOS" o de forma SISTÉMICA — implica patrón deliberado de exclusión, no solo observación puntual
+
+Impugna la RACIONALIDAD o SENSATEZ de la entidad de forma que implica irrazonabilidad deliberada ("SEAMOS SENSATOS... ES IRREAL que [requisito]... [los pliegos] SEAN MAS REALES")
+
+Amenaza de denunciar el "MAL USO DE HERRAMHERRAMIENTAS PREFERENCIALES" (VAE u otras) — implica expectativa de fraude institucional
+
+Amenaza con reportar al "COMITÉ DE GESTIÓN DE ÉTICA ANTISOBORNO" u organismo equivalente orientado específicamente a corrupción o soborno + dirigida a imponer sanciones a miembros de la comisión técnica → implica acusación implícita de corrupción/soborno → ACUSATORIA
+
+Pregunta retórica "¿será que el proceso está direccionado para el mismo oferente?" basada en un hecho concreto
+
+Frase implícita de diseño excluyente: "COMO QUE NO ENCAJAMOS EN ESTE PROCESO LOS CONTRATISTAS NUEVOS"
+
+Afirma que el proceso solo puede ser ganado por empresas de cierta región o perfil, implicando exclusión deliberada
+
+⚠ REGLA CRÍTICA: Dice "esta vez si/sí van a…" / "ahora si/sí…" (con o sin tilde) — implica mala fe en procesos pasados → ACUSATORIA aunque sea un mensaje muy breve
+
+Señala comportamiento pasado de la entidad con intención dolosa o corrupta
+
+Amenaza de denuncia + acusación directa de dolo (combinación)
+
+Afirma que la acción actual de la entidad "es causal para control/sanciones por parte del SERCOP" (NO condicional — no dice "si no cambia será denunciado", sino que afirma que el acto ya es sancionable) → más fuerte que una amenaza condicional de denuncia → ACUSATORIA
+
+Declara en indicativo "NO PUEDEN LIMITAR/RESTRINGIR/EXCLUIR la participación" (afirmación asertiva de que la entidad está haciendo algo ilegal ahora) + exige corrección ("rectifiquen") → ACUSATORIA. Distinto de "no se puede pedir marca" que describe un tipo de requisito prohibido
+
+Afirma en indicativo presente "están dirigidas a [marca/modelo específico], lo cual CONTRADICE / VIOLA al Art. X" — el vínculo explícito entre el efecto (dirigidas a) y la violación legal (contradice) convierte la descripción de efecto en acusación de violación activa → ACUSATORIA
+
+"se está direccionando a un proveedor específico" + otro verbo activo en indicativo de cierre/exclusión ("están cerrando la participación", "están excluyendo", "están limitando") → dos acciones activas en indicativo con beneficiario + causa → ACUSATORIA
+
+════════════════════════════════════════
+DISTINCIONES FINAS:
+════════════════════════════════════════
+
+"se está/están direccionando [las especificaciones] a una marca en particular" (describe efecto, pide aclaración) → NO_ACUSATORIA
+
+"el proceso ESTÁ DIRECCIONADO porque el proveedor de esa marca la tiene en el país" (indicativo + causa + beneficiario) → ACUSATORIA
+
+"se nota CLARAMENTE el direccionamiento a una marca en especial, ya que [proveedor específico beneficiado]" → ACUSATORIA
+
+"se estaría direccionando a una marca" (condicional, SIN beneficiario concreto) → NO_ACUSATORIA
+
+"se estaría restringiendo la participación y favoreciendo alguna marca en particular" (condicional + beneficiario identificado) → ACUSATORIA
+
+"no sea que existe direccionamiento" → expresión idiomática de preocupación especulativa ("ojala que no sea que..."), NO afirmación de que existe → NO_ACUSATORIA
+
+"la marca es ilegal solicitar" → norma prohibitiva sobre tipo de requisito → NO_ACUSATORIA
+
+"ESO ES ILEGAL, RECTIFIQUE" → reproche sobre decisión específica → ACUSATORIA
+
+"según el SERCOP está TERMINANTEMENTE PROHIBIDO solicitar X... esta pregunta se la hace en virtud de que solicitan X" → ACUSATORIA (énfasis en prohibición + vinculación directa)
+
+"El SERCOP establece [artículo sobre plazos razonables]... Por lo expuesto se solicita eliminen tal exigencia. Caso contrario será denunciado" → cita como argumento educativo + pide cambio → NO_ACUSATORIA
+
+"Según el Art. 20 LOSNCP los pliegos no podrán afectar trato igualitario... Por lo tanto no pueden solicitar antigüedad de 30 años" → cita principio + argumento + pide respuesta → NO_ACUSATORIA
+
+"están coartando los derechos" + "asesorence bien primero antes de solicitar" → atribuye ignorancia, no dolo → NO_ACUSATORIA (aunque el lenguaje sea enérgico o use gerundio "coartando")
+
+"están cuartando el derecho a la libre participación... requisitos EXCLUYENTES Y DISCRIMINATORIOS" (sin atribuir ignorancia, sin "asesorence") → calificativo de intención + verbo activo → ACUSATORIA
+
+"estarían incumpliendo el artículo... no se está cumpliendo... se están vulnerando los derechos" → indicativo activo en la misma cadena → ACUSATORIA
+
+"estarían incumplimiento el artículo... no seestá cumpliendo... se están vulnerando los derechos" → aunque haya errores gramaticales/tipográficos, el indicativo presente activo prevalece → ACUSATORIA
+
+"estarían incumpliendo... se están vulnerando los derechos... asesorence bien" → el indicativo activo se atenúa por la atribución de ignorancia → NO_ACUSATORIA
+
+"EL PRESUPUESTO ES MUY BAJO para este proceso" (observación puntual) → NO_ACUSATORIA
+
+"EL PRESUPUESTO ES MUY BAJO, LO QUE NO PERMITIRÁ QUE MUCHOS LABORATORIOS PARTICIPEN EN LA MAYORÍA DE PROCESOS" → exclusión sistémica implícita → ACUSATORIA
+
+"el presupuesto es considerablemente bajo para poder ofertar productos de la calidad que merecen" (cortés, un proceso) → NO_ACUSATORIA
+
+"caso contrario el proceso será denunciado al SERCOP Y CONTRALORÍA" tras citar norma, sin acusar de dolo → NO_ACUSATORIA
+
+"SI ALGUIEN ENVÍA UN VAE DIFERENTE DEL 0% SE DENUNCIARÁ AL SERCOP POR HACER MAL USO DE LAS HERRAMIENTAS PREFERENCIALES" → expectativa de fraude institucional → ACUSATORIA
+
+"DEBEN BOTAR DE SU PUESTO AL COPION QUE NO SABE LO QUE COPIA" → insulto + culpa deliberada → ACUSATORIA
+
+"SEAMOS SENSATOS... ES IRREAL que todos y cada uno de las hojas de vida sean las personas que van a trabajar... LA TECNICIDAD DE LOS PLIEGOS SEAN MAS REALES" → impugna racionalidad → ACUSATORIA
+
+Mensajes que defienden al oferente frente a ataques de competidores → NO_ACUSATORIA
+
+"dejan mucho que desear" sobre contratos pasados → insatisfacción sin dolo → NO_ACUSATORIA
+
+Lenguaje en mayúsculas sobre imposibilidad técnica sin atribuir intención → NO_ACUSATORIA
+
+"NO DEBERIAN MONTAR EN COMPRAS PUBLICAS A NIVEL NACIONAL SI REQUIEREN [condición imposible para foráneos]... TIENE QUE SER SOLO EMPRESAS DE [ciudad]" → reproche directo → ACUSATORIA (aunque también describa imposibilidad técnica)
+
+"esta vez si van a calificar bien" / "esta vez sí van a..." / "ahora si van a..." → implica mala fe en procesos anteriores → ACUSATORIA
+
+"¿por qué está activada en el sistema la opción X si no la solicitan en los pliegos?" → pregunta técnica sobre discrepancia, busca aclaración factual → NO_ACUSATORIA
+
+"¿por qué exigen certificado X para la compra de Y si no aplica?" → pregunta pidiendo justificación técnica, no reproche de intención excluyente → NO_ACUSATORIA
+
+"¿por qué esa compra a X sin que exista presentación de otras casas? ¿por ser único representante?" → pregunta procedimental de aclaración sobre una decisión de compra, no reproche de intención excluyente → NO_ACUSATORIA
+
+"da la impresión que es direccionado a una sola empresa. Se recuerda que el proceso puede ser observado por CONTROLORIA y puede ser DENUNCIADO" → conjetural ("da la impresión") + recordatorio prospectivo de vigilancia, sin afirmar dolo consumado → NO_ACUSATORIA
+
+"están dirigidas a la motocicleta marca Suzuki modelo V-Strom250, lo cual contradice al Art. 4 de la LOSNCP" → indicativo + vínculo explícito a violación legal ("contradice al Art.") → ACUSATORIA (vs. "se está direccionando a una marca" sin "contradice" → NO_ACUSATORIA)
+
+"se está direccionando a un proveedor específico y basados en la ley de libre competencia están cerrando la participación" → dos verbos activos en indicativo presente + beneficiario identificado + causa legal → ACUSATORIA
+
+"es causal para control por parte del SERCOP y posterior sanciones a la entidad" → afirma que la acción actual ES sancionable (no amenaza futura condicional) → ACUSATORIA
+
+"se reportará al comité de gestión de ética antisoborno creado por el SERCOP para imponer sanciones a los miembros de la comisión técnica" → denuncia a comité anticorrupción + sanciones personales a miembros → implica acusación de corrupción/soborno → ACUSATORIA
+
+"LES PREGUNTO SRES... USTEDES ENTIENDEN ALGO DE LAS ESPECIFICACIONES QUE ESTAN PIDIENDO?? LO DUDO SEAMOS SERIOS Y TRABAJEMOS CON TRANSPARENCIA Y CLARIDAD" → desdén sarcástico + exige seriedad y transparencia → ACUSATORIA
+
+"DISCRIMINACIÓN CONTRA LOS DEMÁS OFERENTES... ATENTA CONTRA LOS PRINCIPIOS DE TRATO JUSTO, CONCURRENCIA Y PARTICIPACIÓN" (indicativo asertivo, sin atribución de ignorancia) → calificativo de exclusión + verbo activo "atenta" → ACUSATORIA
+
+"no pueden limitar la participación de los proveedores... rectifiquen tamaño error" → afirmación asertiva de limitación ilegal en curso + exigencia de corrección → ACUSATORIA (vs. "no se puede pedir marca" que describe tipo de requisito prohibido → NO_ACUSATORIA)
+
+EJEMPLOS:
+
+[ACUSATORIA]
+Pregunta: "saludos, el requerimiento que ustedes necesitan claramente esta direccionado para una empresa enparticular, lo
+que esta prohibido por la ley, restando oportunidad a productos de origuen nacionalque cumplen con las mismas funciones
+que los solicitados"
+
+[ACUSATORIA]
+Pregunta: "EL COMPAÑERITO DE LA PREGUNTA 5 TIENE TODA LA RAZON, EL GADMP ES EL UNICO EN SOLICITAR TANTA PABADAY DE ESTA
+MANERA DEJAR HABILITADOS A LOS DOS MISMOS DE SIEMPRE QUE LE DAN EN LA NUCA CON LOS PRECIOSAL MUNICIPIO...Y ES MAS ELLOS
+MISMOS SON LOS QUE REALIZAN LAS PROFORMAS,.EL PAGO ES CONTRA ENTREGA AENTERA SATISFACCION DE LA ENTIDAD CONTRATANTE
+SEÑORES RUEGO MIENTRAS MAS OFERTAS HAYAN ES MUCHOMEJOR PARA LA ENTIDAD....MAS OFERTA Y MAS AHORRO, MARCAS CONOCIDAS
+COMOSTANLEY,VIRO,TRUPER,DEWALT,BOSH,NO SE A DONDE VA QUE PONGA CATALOGOS DE UN CLAVO, DE UNA TABLA DEENCOFRADO,
+ETC......ETC...ETC....SALUDOS CORDIALES"
+
+[ACUSATORIA]
+Pregunta: "Revisados los pliegos encontramos imposiciones contrarias a la ley de comercio cual es el del libreejercicio
+comercial estipulada claramente en la convocatoria y tambien contrarias al modelo depliegos elaborados por el Sistema de
+Compras Publicas. Como es posible que se convoque a SubastaInversa de una excavadora de caracteristicas tecnicas que en
+el mercado y a precio normal seencuentra en $ 140.000 con un presupuesto referencial de $ 390.000 disculpen pero O es
+equivocaciono es intento de negociado?."
+
+[ACUSATORIA]
+Pregunta: "Estimados.En los TDR y pliegos del proceso están solicitando de manera obligatoria CertificacionesASSE 6005,
+6010 y 6020 donde el objeto de contratación es el suministro de gases medicinales paraatención de pacientes COVID-19
+donde los únicos documentos deben ser los permisos defuncionamiento, registro sanitarios, BPM y certificaciones INEN que
+avalan la calidad del producto.Adicionalmente solicitar certificado internacionales de manera obligatoria va en CONTRA
+DEL ART.No.4 DE LAS BUENAS PRÁCTICAS DE CONTRATACIÓN PÚBLICA puesto que esto favorece a empresasmultinacionales que
+tienen los recursos para obtener dichas certificaciones e iendo en contra DELTRATO IGUALITARIO, EQUITATIVO Y TRANSPARENTE
+acordel Art. No. 4 de la LOSNCP. Por todo lo antesmencionado solicitamos que se elimine dicho requerimiento el cual en
+procesos anteriores ustedes yalo han desestimado permitiendo una TRANSPARENCIA en el proceso caso contrario se hará el
+reclamo alSERCOP para dar de baja el proceso."
+
+[ACUSATORIA]
+Pregunta: "señores las caracteristicas de las pinturas que solicitan corresponden a una marca especifia enecuador existen
+otras fabricas con iguales o mejores caracteristicas de la que solicitan recuerdenque no podemos ser descalificados por
+marca siempre que cumplan con las caracteristicas tecnicas ylas garantias necesarias"
+
+[NO ACUSATORIA]
+Pregunta: "como experiencia general y especifica se tomaran en cuenta contratos de señalización turísticadonde existan
+porticos , señales verticales elaborados con tubo cuadrado galvanizado aclarar ?"
+
+[NO ACUSATORIA]
+Pregunta: "Sección:9. Productos y Servicios esperados9.1 Instalación y configuración de la plataforma IBMCognos Analytics
+11 Nuevo ambiente de desarrolloPregunta: Por favor especificar si el punto: "Clonarlos servidores actuales de producción"
+se lo debe incluir como parte del alcance y especificarcuál es el objetivo de la clonación."
+
+[NO ACUSATORIA]
+Pregunta: "Estimados señores: por favor aclarar para que tiempo de abastecimiento se contempla este proceso.Gracias"
+
+[NO ACUSATORIA]
+Pregunta: "Estimados Señores de no incluir el presupuesto referencial el costo de mantenimiento preventivo porlos 8 años
+posteriores a la Garantia Tecnica del Fabricante de los equipos médicos a ofertar, encalidad de proveedores debemos
+presentar nuestra oferta del mantenimiento preventivo referido?Gracias"
+
+[NO ACUSATORIA]
+Pregunta: "Estimados Señores, pueden aceptar un rango de tolerancia de +/- 0,5 cm en el ítemcorrespondieinnte al apósito
+IV 7x8,5cm."
+
+Responde ÚNICAMENTE con: "ACUSATORIA" o "NO_ACUSATORIA"
+
+PREGUNTA: "{pregunta}"
+
+CLASIFICACIÓN:

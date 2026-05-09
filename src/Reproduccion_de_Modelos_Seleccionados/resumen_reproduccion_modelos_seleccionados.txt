@@ -1,0 +1,13 @@
+ Reproducción de modelos
+
+ Propósito:Reproduce los tres modelos seleccionados con los hiperparámetros finales, validando métricas sobre el conjunto de test.
+- Entradas:
+  - `Archivos_Naive_Bayes/train_embeddings_balanced_AUG_GPT4o_mini_total_augmented_text-embedding-3-large.csv`
+  - `Archivos_Random_Forest/train_embeddings_balanced_total_sentence_prompt_GPT4o_mini_text-embedding-3-large.csv`
+  - `Archivos_Logistic_Regression/train_embeddings_balanced_total_sinonimos_text-embedding-3-large.csv`
+  - `Archivos_Random_Forest_1/train_embeddings_total_augmented_data_text-embedding-3-large.csv` (RF augmentado)
+  - `test_embeddings_text-embedding-3-large.csv`
+- Salidas: Solo métricas impresas en consola (no persiste nada en disco).
+Igualmente se probaron las alternativas de las versiones de los modelos basadas en probabilidad (no binarias).
+
+* Importante: Los archivos tanto de entrenamiento como de test fueron obtenidos directamente del repositorio de trabajo de Francisco Roh

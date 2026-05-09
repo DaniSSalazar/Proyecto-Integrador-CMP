@@ -1,0 +1,73 @@
+Es el notebook de evaluación de la tesis usando un LLM como "juez" basado en etiqueta humana (la etiqueta
+final_pregunta_isAcusatoria del dataset). Toma los 7 índices producidos en results_2021_v2.ipynb (ID_bin_rf,
+ID_bin_rf_aug, ID_bin_lr, ID_prob_rf, ID_prob_rf_aug, ID_prob_lr, ID_prob_weighted), los compara contra el LLM-juez
+calibrado, y selecciona el mejor modelo. Tiene las secciones lógicas:
+
+1. Splits del dataset etiquetado humano
+
+- Lee dataset.csv (5.005 preguntas con final_pregunta_isAcusatoria).
+- 80/20 estratificado → alignment_set_80.csv y final_test_set_20.csv.
+- Sub-split 80/20 sobre el 80% → alignment_set_dev.csv y alignment_set_val.csv (para iterar prompts).
+
+2. Calibración del prompt del LLM-juez
+
+- Tiene el prompt 15 activo: un SYSTEM_PROMPT en español muy extenso
+(reglas, patrones ACUSATORIA / NO_ACUSATORIA, distinciones finas, ~60 ejemplos).
+- classify_question(question) llama a client.responses.create() con reasoning={"effort":"high"} y JSON Schema (label 0/1
++ reason).
+- evaluate_llm_judge() reporta matriz de confusión, F1/precision/recall vs etiqueta humana.
+- Corre la evaluación sobre alignment_set_val → llm_alignment_results_val_prompt15.csv.
+- Análisis de falsos positivos (longitud de pregunta, términos acusatorios frecuentes).
+
+3. Generación de los 7 índices ML sobre el test set 20% (Cells 18-24)
+
+Para cada índice entrena con los CSV en Archivos_* y predice sobre final_test_set_20.csv:
+- ID_bin_rf, ID_bin_lr, ID_bin_rf_aug (predicciones binarias)
+- ID_prob_rf, ID_prob_lr, ID_prob_rf_aug (probabilidades)
+- ID_prob_weighted (combinación ponderada por Brier: W_LR_NORM·prob_lr + W_RF_NORM·prob_rf + W_RF_AUG_NORM·prob_rf_aug)
+
+Salidas: ID_*_final_test_results_20.csv (uno por índice).
+
+4. Embeddings del test set
+
+Genera final_test_set_20_embeddings_text-embedding-3-large.csv para alimentar a los modelos (necesario porque los modelos
+Archivos_* usan embeddings de OpenAI).
+
+5. Selección del mejor modelo en el test set
+
+Para cada índice calcula:
+- F1 / precision / recall vs juez humano (referencia primaria).
+- F1 / precision / recall vs juez LLM (referencia secundaria).
+- Average Precision y ROC-AUC para los probabilísticos.
+- ranking de los 7 índices, seleccionando el ganador.
+
+6. LLM-as-judge en producción 2021 (400 procesos)
+
+- Toma 400 procesos aleatorios (seed=42) de output/2021/preguntas_2021_prepared.csv.
+- Clasifica todas sus preguntas con el LLM (prompt 15).
+- Calcula llm_densidad por proceso = acusatorias_llm / total_preguntas_llm.
+- Salidas:
+- output/2021/llm_prompt15_random_process_questions.csv (pregunta-nivel)
+- output/2021/llm_prompt15_random_process_densities.csv (proceso-nivel, con ID_prob_weighted adjunto)
+- (También hay una variante con prompt 9 siguiendo el mismo patrón.)
+
+7. Comparación distribución LLM vs índices
+
+- Histogramas (Seaborn, en porcentaje, con líneas de medias) y ECDFs por cada uno de los 7 índices vs llm_densidad.
+- Métricas de similitud entre distribuciones:
+- KS distance y p-valor.
+- Wasserstein distance.
+- Jensen-Shannon divergence (sobre histogramas con 30 bins).
+- Diferencia de medias y desviaciones.
+
+8. Comparación de ordenamientos (rankings)
+
+Mide qué índice ordena los procesos más parecido al LLM:
+- Spearman, Kendall-Tau, Pearson entre llm_densidad y cada índice.
+- Top-k overlap (k = 10, 20, 50, 100): % de procesos que aparecen en el top-k de ambos.
+- Listado de procesos comunes en top-50.
+
+9. Tablas finales y búsqueda de threshold
+
+- Tablas separadas por familia de métricas (distribución vs ranking).
+- Búsqueda del mejor threshold para los índices probabilísticos (binarizándolos y comparando F1/precision/recall vs LLM).

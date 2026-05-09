@@ -1,0 +1,57 @@
+data_transformation_2021.py
+
+Fase: Procesamiento del año completo 2021
+
+Propósito
+
+Carga el universo de preguntas del SOCE 2021, limpia (descarta filas vacías
+o sin fecha), prepara metadata y genera embeddings text-embedding-3-large
+de forma concurrente. La salida son chunks de 5.000 filas para evitar
+problemas de memoria y permitir reanudar tras interrupciones.
+
+Archivos de entrada 
+
+1. preguntas_2021.csv
+   - Universo crudo de preguntas-respuestas del SOCE para 2021.
+   - Columnas relevantes:
+       contract_id, pregunta, respuesta, fecha, monto_proceso,
+       es_acusatoria (etiqueta Kapak por reglas), entre otras.
+   - Origen: extracción del SOCE / proyecto Kapak.
+
+2. .env 
+   - OPENAI_API_KEY para llamar al endpoint de embeddings.
+
+Archivos de salida 
+
+- output/2021/preguntas_2021_prepared.csv
+   - Versión limpia de preguntas_2021.csv (filas válidas, índice estable).
+
+- output/2021/embeddings_2021_XXXXXX_YYYYYY.csv
+   - Chunks de embeddings de 20.000 filas:
+       embeddings_2021_000000_20000.csv
+       embeddings_2021_020000_040000.csv
+       ...
+       embeddings_2021_120000_134294.csv (cobertura completa)
+   - 3072 columnas de embeddings.
+
+Notas 
+
+- El script soporta reanudación: si un chunk ya existe, lo salta.
+- Concurrencia controlada con ThreadPoolExecutor para no exceder el rate
+  limit de OpenAI.
+- Costo aproximado por la corrida completa: ~USD del orden bajo (depende
+  del precio actual de text-embedding-3-large por millón de tokens).
+
+Cómo regenerar las entradas
+
+preguntas_2021.csv proviene del proyecto Kapak. Si no lo tienes:
+  1. Acceder a la base PostgreSQL Kapak SIE.
+  2. Adaptar la consulta de kapak_extract_embeddings.py al rango de
+     fechas 2021-01-01 a 2021-12-31.
+  3. Exportar como CSV.
+
+Cómo correr el archivo
+
+   python data_transformation_2021.py --start-idx 0 --end-idx 20000 --output-chunk-size 20000
+
+*Para este proyecto este archivo se ejecutó cada 20000 procesos (eran 134294)

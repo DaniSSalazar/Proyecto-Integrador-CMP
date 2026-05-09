@@ -1,0 +1,43 @@
+1. 'modelos_probabilidades.ipynb'
+
+- Propósito: Explora estrategias de agregación de probabilidades por proceso (media, máximo, top-K, percentil 90, densidad) usando los tres modelos.
+- Entradas:  
+        - `Archivos_Naive_Bayes/train_embeddings_balanced_AUG_GPT4o_mini_total_augmented_text-embedding-3-large.csv`
+        - `Archivos_Random_Forest/train_embeddings_balanced_total_sentence_prompt_GPT4o_mini_text-embedding-3-large.csv`
+        - `Archivos_Logistic_Regression/train_embeddings_balanced_total_sinonimos_text-embedding-3-large.csv`
+        - `Archivos_Random_Forest_1/train_embeddings_total_augmented_data_text-embedding-3-large.csv` (RF augmentado)
+        - `test_embeddings_text-embedding-3-large.csv`
+- Salidas:Análisis exploratorio (sin persistencia en disco).
+- En este archivo se calculan los pesos de los modelos de ID_prob_weighted basado en brier score
+
+2. 'results_2021_v1.ipynb' y 'results_2021_v2.ipynb'
+
+    - Ambos notebooks tienen el mismo esqueleto (entrenan modelos con los CSV en Archivos_*, recorren los embeddings_2021_*.csv
+    por chunks, agregan por contract_id y vuelcan a output/2021/indices_per_process.csv). Lo que cambia es qué modelos usan,
+    cómo nombran los índices y qué fórmulas aplican.
+    - En la versión 1, se estaba descartando el uso de Naive Bayes para calcular los índices (solo se usaban 2 modelos), lo cual fue modificado posteriormente debido a la importancia de los tres perfiles de modelos
+    - En la versión 1, se consideraron índices de las distintas familias que se habían propuesto incialmente, como se muestra a continuación:
+         IC_M1_rf, IC_M1_lr: media de probabilidades por proceso (un índice por modelo).
+        - IC_M2_rf, IC_M2_lr: Noisy-OR por proceso, 1 − Π(1 − p).
+        - IC_M3: media del soft vote ponderado pre-agregación (W_LR·p_lr + W_RF·p_rf por pregunta, luego promediado por proceso).
+        - IC_M4: Noisy-OR de ese soft vote ponderado.
+        - IC_M5_density: porcentaje de preguntas con voto binario ponderado ≥ 0.5.
+    - La versión 2 es la versión final de los índices que se tomaron en cuenta
+    - v2 → familia ID_* (7 índices, 3 modelos)
+        - ID_bin_rf, ID_bin_rf_aug, ID_bin_lr: porcentaje de preguntas clasificadas como acusatorias por la versión binaria de
+        cada modelo.
+        - ID_prob_rf, ID_prob_rf_aug, ID_prob_lr: media de probabilidades por modelo (equivalente a IC_M1_* de v1).
+        - ID_prob_weighted: combinación ponderada post-agregación, W_1 · ID_prob_rf + W_2 · ID_prob_rf_aug +
+        W_3 · ID_prob_lr.
+    
+    * v1 es la versión inicial, pero posterior a indices_and_distributions_2021.ipynb, con dos modelos (RF + LR) y un zoo de agregaciones (media, Noisy-OR, soft/binary vote) más todo
+    el análisis de distribución; v2 simplifica el conjunto de índices a bin/prob por modelo, suma el Random Forest aumentado
+     en lugar de Naive Bayes y reemplaza los soft votes por un único ID_prob_weighted calculado después de la agregación.
+
+
+
+    'indices_and_distributions_2021.ipynb'
+
+    Es el notebook end-to-end donde se realizaron los primeros experimentos para esta tesis: limpieza → embeddings (NB+RF+LR) → 8 índices de riesgo → comparación
+    temporal con la etiqueta Kapak. Los results_2021.ipynb y results_2021_v2.ipynb son versiones posteriores que se quedaron
+    con la parte de cómputo de índices. 

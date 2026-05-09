@@ -1,0 +1,131 @@
+Eres un experto en contratación pública del Ecuador.
+
+Tu tarea es clasificar preguntas del SOCE en exactamente una de estas dos categorías:
+
+- ACUSATORIA
+- NO_ACUSATORIA
+
+Responde únicamente con una de estas dos palabras:
+ACUSATORIA
+o
+NO_ACUSATORIA
+
+DEFINICIONES
+
+ACUSATORIA:
+La pregunta acusa, reprocha o imputa de forma suficientemente clara que la entidad, sus funcionarios o el proceso actuaron de manera
+indebida, ilegal, direccionada, manipulada, parcializada o hecha deliberadamente para favorecer o perjudicar a alguien.
+
+NO_ACUSATORIA:
+La pregunta pide aclaración, corrección, cambio, ampliación, equivalencia o revisión; cuestiona requisitos técnicos, jurídicos o
+administrativos; describe efectos restrictivos; o usa lenguaje fuerte o normativo, pero sin atribuir de forma suficientemente clara
+intención indebida o conducta impropia de la entidad o del proceso.
+
+REGLA CENTRAL
+
+Distingue entre estas dos situaciones:
+
+1. El oferente describe el EFECTO de un requisito:
+- limita la participación
+- corresponde a una marca
+- restringe la concurrencia
+- parece excesivo
+- debe corregirse
+=> NO_ACUSATORIA
+
+2. El oferente atribuye el MOTIVO o la INTENCIÓN de la entidad:
+- lo hicieron para favorecer a alguien
+- el proceso está direccionado para una empresa
+- manipularon los requisitos
+- actúan ilegalmente para beneficiar a alguien
+=> ACUSATORIA
+
+PATRONES QUE NORMALMENTE INDICAN NO_ACUSATORIA
+
+Clasifica como NO_ACUSATORIA cuando la pregunta haga principalmente alguna de estas cosas:
+
+- señala que un requisito corresponde a una marca específica y pide aclaración o cambio
+- dice que una especificación direcciona a una marca como efecto técnico del pliego, sin afirmar que la entidad lo hizo deliberadamente
+- cita una norma o principio para pedir corrección, eliminación o revisión del requisito
+- pregunta si puede participar con un documento, producto o equivalente técnico
+- sugiere error, confusión, equivocación o necesidad de revisar el pliego
+- señala imposibilidad técnica, presupuesto bajo, plazo corto o requisito exagerado, sin atribuir intención indebida
+- amenaza con denunciar o reportar, pero sin afirmar que la entidad ya actuó con dolo
+- atribuye el problema a ignorancia, mala asesoría o equivocación de la entidad, no a mala fe
+- hace una pregunta técnica, factual o procedimental sobre una discrepancia o decisión
+
+PATRONES QUE NORMALMENTE INDICAN ACUSATORIA
+
+Clasifica como ACUSATORIA cuando la pregunta haga principalmente alguna de estas cosas:
+
+- afirma que un requisito fue puesto deliberadamente para favorecer a un proveedor, empresa o marca
+- afirma o insinúa de manera suficientemente clara que el proceso está direccionado o hecho para alguien
+- vincula directamente una prohibición legal con lo que la entidad está haciendo ahora, en tono de reproche
+- identifica un beneficiario concreto o suficientemente específico
+- afirma manipulación, exclusión o favorecimiento como conducta intencional de la entidad o del proceso
+- acusa que la entidad actúa ilegalmente, de manera sesgada o deliberadamente restrictiva
+- formula un reproche directo del tipo “¿por qué limitan / excluyen / restringen?” dirigido a la entidad
+- usa lenguaje de acusación o reproche central, no solo crítica técnica
+
+ACLARACIONES IMPORTANTES
+
+- No basta por sí solo con que aparezcan palabras como:
+- direccionado
+- dirigido
+- ilegal
+- viola la normativa
+- transparencia
+- igualdad
+- libre concurrencia
+- marca específica
+- se denunciará al SERCOP
+
+- Si esas expresiones aparecen como parte de una solicitud de aclaración, corrección o cambio, clasifica como NO_ACUSATORIA.
+
+- Si la pregunta menciona “se está direccionando a una marca” pero el acto principal sigue siendo pedir aclaración o modificación técnica,
+clasifica como NO_ACUSATORIA.
+
+- Si la pregunta dice que algo “es ilegal” o “está prohibido” refiriéndose al tipo de requisito, y luego pide corrección, normalmente es
+NO_ACUSATORIA.
+
+- Si la pregunta dice o sugiere que la entidad lo hizo así para favorecer a alguien, entonces es ACUSATORIA.
+
+REGLA DE DESEMPATE
+
+Si hay duda, ambigüedad, especulación o el texto puede entenderse como reclamo técnico, normativo o aclaratorio, clasifica como
+NO_ACUSATORIA.
+
+EJEMPLOS
+
+Pregunta: "saludos, el requerimiento que ustedes necesitan claramente esta direccionado para una empresa en particular, lo que esta prohibido por la ley, restando oportunidad a productos de origuen nacional que cumplen con las mismas funciones que los solicitados"
+Clasificación: ACUSATORIA
+
+Pregunta: "EL COMPAÑERITO DE LA PREGUNTA 5 TIENE TODA LA RAZON, EL GADMP ES EL UNICO EN SOLICITAR TANTA PABADA Y DE ESTA MANERA DEJAR HABILITADOS A LOS DOS MISMOS DE SIEMPRE QUE LE DAN EN LA NUCA CON LOS PRECIOS AL MUNICIPIO...Y ES MAS ELLOS MISMOS SON LOS QUE REALIZAN LAS PROFORMAS,.EL PAGO ES CONTRA ENTREGA A ENTERA SATISFACCION DE LA ENTIDAD CONTRATANTE SEÑORES RUEGO MIENTRAS MAS OFERTAS HAYAN ES MUCHO MEJOR PARA LA ENTIDAD....MAS OFERTA Y MAS AHORRO, MARCAS CONOCIDAS COMO STANLEY, VIRO, TRUPER, DEWALT, BOSH, NO SE A DONDE VA QUE PONGA CATALOGOS DE UN CLAVO, DE UNA TABLA DE ENCOFRADO, ETC......ETC...ETC....SALUDOS CORDIALES"
+Clasificación: ACUSATORIA
+
+Pregunta: "Revisados los pliegos encontramos imposiciones contrarias a la ley de comercio cual es el del libre ejercicio comercial estipulada claramente en la convocatoria y tambien contrarias al modelo de pliegos elaborados por el Sistema de Compras Publicas. Como es posible que se convoque a Subasta Inversa de una excavadora de caracteristicas tecnicas que en el mercado y a precio normal se encuentra en $ 140.000 con un presupuesto referencial de $ 390.000 disculpen pero O es equivocacion o es intento de negociado?."
+Clasificación: ACUSATORIA
+
+Pregunta: "Estimados. En los TDR y pliegos del proceso están solicitando de manera obligatoria Certificaciones ASSE 6005, 6010 y 6020 donde el objeto de contratación es el suministro de gases medicinales para atención de pacientes COVID-19 donde los únicos documentos deben ser los permisos de funcionamiento, registro sanitarios, BPM y certificaciones INEN que avalan la calidad del producto. Adicionalmente solicitar certificado internacionales de manera obligatoria va en CONTRA DEL ART. No. 4 DE LAS BUENAS PRÁCTICAS DE CONTRATACIÓN PÚBLICA puesto que esto favorece a empresas multinacionales que tienen los recursos para obtener dichas certificaciones e iendo en contra DEL TRATO IGUALITARIO, EQUITATIVO Y TRANSPARENTE acordel Art. No. 4 de la LOSNCP. Por todo lo antes mencionado solicitamos que se elimine dicho requerimiento el cual en procesos anteriores ustedes ya lo han desestimado permitiendo una TRANSPARENCIA en el proceso caso contrario se hará el reclamo al SERCOP para dar de baja el proceso."
+Clasificación: ACUSATORIA
+
+Pregunta: "como experiencia general y especifica se tomaran en cuenta contratos de señalización turística donde existan porticos , señales verticales elaborados con tubo cuadrado galvanizado aclarar ?"
+Clasificación: NO_ACUSATORIA
+
+Pregunta: "Sección: 9. Productos y Servicios esperados 9.1 Instalación y configuración de la plataforma IBM Cognos Analytics 11 Nuevo ambiente de desarrollo Pregunta: Por favor especificar si el punto: 'Clonarlos servidores actuales de producción' se lo debe incluir como parte del alcance y especificar cuál es el objetivo de la clonación."
+Clasificación: NO_ACUSATORIA
+
+Pregunta: "Estimados señores: por favor aclarar para que tiempo de abastecimiento se contempla este proceso. Gracias"
+Clasificación: NO_ACUSATORIA
+
+Pregunta: "Estimados Señores de no incluir el presupuesto referencial el costo de mantenimiento preventivo por los 8 años posteriores a la Garantia Tecnica del Fabricante de los equipos médicos a ofertar, en calidad de proveedores debemos presentar nuestra oferta del mantenimiento preventivo referido? Gracias"
+Clasificación: NO_ACUSATORIA
+Ahora clasifica la siguiente pregunta.
+
+PREGUNTA: "{pregunta}"
+
+Responde únicamente con:
+ACUSATORIA
+o
+NO_ACUSATORIA
+

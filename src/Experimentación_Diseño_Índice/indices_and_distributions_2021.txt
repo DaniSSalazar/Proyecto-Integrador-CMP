@@ -1,0 +1,63 @@
+Es el pipeline "todo en uno" original del análisis 2021. A diferencia de los notebooks results_2021*.ipynb (que solo
+  consumen embeddings ya generados y producen indices_per_process.csv), este notebook arranca desde el CSV crudo y termina 
+  con gráficos y correlaciones temporales contra Kapak. Tiene 8 secciones encadenadas:
+
+  1. Carga y limpieza (preguntas_2021.csv)
+
+  - Lee preguntas_2021.csv con un workaround para un CSV doblemente entrecomillado (cell 6).
+  - Normaliza valor_preguntas, es_acusatoria (a bool) y fecha_publicacion (a datetime).
+  - Filtra filas vacías.
+
+  2. Generación de embeddings (interactiva, chunk a chunk)
+
+  - Llama a OpenAI text-embedding-3-large reusando un caché JSONL (embedding_cache_text-embedding-3-large.jsonl).
+  - Funciona manualmente en bloques de 5.000: la usuaria edita START_IDX = 75000 y reejecuta. Cada bloque se guarda como
+  sie_2021_embeddings_chunk_{start:06d}_{end:06d}.csv.
+  - Una celda final ensambla todos los chunks en emb_matrix validando que cubran consecutivamente las preguntas.
+
+  ▎ Nota: este es el origen de los sie_2021_embeddings_chunk_*.csv que vimos antes — distintos a los embeddings_2021_*.csv 
+  ▎ que consumen los results_2021*.ipynb.
+
+  3. Entrenamiento de 3 modelos y probabilidades por pregunta
+
+  - Naive Bayes (Archivos_Naive_Bayes, var_smoothing=0.351…)
+  - Random Forest (Archivos_Random_Forest, n_estimators=200)
+  - Logistic Regression (Archivos_Logistic_Regression, C=100, solver='saga')
+  - Salida: sie_2021_question_probabilities.csv con prob_nb, prob_rf, prob_lr por pregunta.
+
+  4. Índices de riesgo por proceso (8 índices)
+
+  Track A — cada modelo independiente
+  - IC_M1_nb/rf/lr: media de probabilidades por proceso.
+  - IC_M2_nb/rf/lr: Noisy-OR 1 − Π(1 − p) por modelo.
+
+  Track B — soft vote ponderado por Brier
+  - r_q = W_LR·p_lr + W_RF·p_rf + W_NB·p_nb (los mismos pesos que conoces, pero el tercero es W_NB = 0.0524, no W_RF_AUG).
+  - IC_M3 = media de r_q; IC_M4 = Noisy-OR de r_q.
+  - Salida: sie_2021_process_indices.csv.
+
+  5. Etiquetas Kapak por proceso
+
+  - Agrega es_acusatoria por contract_id → nro_preguntas_acusatorias y label_acusatorio (≥1 acusatoria).
+  - Salida: sie_2021_process_labels.csv.
+
+  6. Distribuciones DIARIAS (Kapak vs cada índice)
+
+  Por cada uno de los 8 IC_*:
+  - 1 PNG individual de barras Kapak vs índice.
+  - 1 CSV daily/daily_aggregate_<IC>.csv.
+  - Correlación de Pearson diaria Kapak vs índice.
+  - Panel 2×4 con todos los índices: daily/daily_comparison_all_indices_2x4.png.
+  - Resumen consolidado: daily/daily_indices_summary.csv.
+
+  7. Distribuciones SEMANALES
+
+  - Mismo esquema que la sección 6 pero con bucket = lunes de la semana.
+  - Salidas en weekly/weekly_aggregate_<IC>.csv, panel weekly_comparison_all_indices_2x4.png, resumen
+  weekly_indices_summary.csv.
+
+  8. Resumen estadístico
+
+  - describe() de los 8 índices.
+  - Tablas de correlaciones Pearson (Kapak vs índice) a nivel diario y semanal.
+  - Listado de todos los archivos generados en output/2021/.

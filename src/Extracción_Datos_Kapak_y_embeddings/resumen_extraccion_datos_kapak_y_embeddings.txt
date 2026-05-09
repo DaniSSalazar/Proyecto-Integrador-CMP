@@ -1,0 +1,36 @@
+1.`kapak_extract_embeddings.py`
+
+- **Propósito:** Extrae preguntas-respuestas de la base PostgreSQL del proyecto Kapak (SIE) para subasta inversa, genera embeddings con `text-embedding-3-large` de OpenAI, y persiste todo en CSV/JSONL.
+- **Entradas:**
+  - Base PostgreSQL Kapak SIE (credenciales en `.env`: `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`) 
+  - `OPENAI_API_KEY` en `.env` 
+- **Salidas:**
+  - `output/kapak_sie_questions_raw.csv`
+  - `output/kapak_sie_questions_embeddings.jsonl`
+  - `output/kapak_sie_embeddings_matrix_text_embedding_3_large.csv`
+  - `embedding_cache_text-embedding-3-large.jsonl`
+
+Este código fue realizado como primera prueba de extracción de preguntas desde la base de datos de Kapak y de la transformación a embeddings.
+Posteriormente, tomo en consideración que Roh tomó preguntas para los datasets de entrenamiento de los modelos de este año (2022).
+Por ende, se tómo el año 2021 y se cambió la forma de extracción a primero obtener las preguntas de la base de datos, guardar este resultado y luego transformarlos.
+
+2.`kapak_extract_questions_2021.py`
+
+    Extracción de todas las preguntas de Kapak pertenecientes al proceso SIE año 2021. Se guardaron todas las preguntas en un archivo llamado preguntas_2021.csv, y se incluyeron las siguientes columnas:
+
+    | Columna                                 | Significado                     |
+| --------------------------------------- | ------------------------------- |
+| `contract_id`                           | ID del proceso                  |
+| `codigo`                                | Código del proceso              |
+| `fecha_publicacion`                     | Fecha de publicación            |
+| `estado_del_proceso`                    | Estado del proceso contractual  |
+| `presupuesto_referencial_total_sin_iva` | Presupuesto referencial         |
+| `monto_contrato`                        | Monto del contrato              |
+| `monto_adjudicacion`                    | Monto adjudicado                |
+| `valor_preguntas`                       | Texto de la pregunta            |
+| `es_acusatoria`                         | `True` o `False` según el query |
+| `clasificacion`                         | `Acusatoria` o `No Acusatoria`  |
+
+3.`data_transformation_2021.py`
+
+Transforma las preguntas en el archivo preguntas_2021.csv a sus respectivos embeddings

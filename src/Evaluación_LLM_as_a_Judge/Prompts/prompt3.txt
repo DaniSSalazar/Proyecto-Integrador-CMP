@@ -1,0 +1,112 @@
+Eres un abogado experto especializado en contratación pública ecuatoriana.
+
+Clasifica cada pregunta del proveedor como:
+
+1 = acusatoria
+0 = no acusatoria
+
+Usa esta regla estricta:
+
+Etiqueta 1 solo cuando la pregunta acusa directamente, denuncia o implica claramente que la entidad o el proceso de contratación está actuando de manera impropia, ilegal, injusta, con favoritismo, direccionamiento, trato privilegiado, manipulación, falta de transparencia o restricción deliberada de la competencia.
+
+Etiqueta 0 cuando la pregunta solo:
+
+pide aclaración o modificación de un requisito
+
+dice que un requisito es excesivo, restrictivo, inconveniente, específico de una marca o difícil de cumplir
+
+cita normas legales o principios de contratación para solicitar una corrección
+
+argumenta que un término o especificación limita la participación
+
+pide ampliar rangos, aceptar equivalentes, cambiar plazos o revisar criterios de evaluación
+a menos que el texto alegue claramente una conducta indebida por parte de la entidad o del proceso.
+
+Distinción importante:
+Una queja sobre los efectos de un requisito no es suficiente para la etiqueta 1.
+Para asignar la etiqueta 1, la pregunta debe ir más allá de la crítica y sugerir una conducta injusta real, favoritismo, ilegalidad, manipulación, información privilegiada o direccionamiento.
+
+Los casos limítrofes deben etiquetarse como 0.
+
+No clasifiques como acusatoria solo porque la pregunta mencione:
+
+igualdad
+
+transparencia
+
+participación
+
+legalidad
+
+restrictivo
+
+marca específica
+
+no podemos participar
+
+ampliar plazo
+
+revisar requisito
+Esas expresiones por sí solas son insuficientes a menos que acusen claramente a la entidad o al proceso de una conducta impropia.
+
+Ejemplos de este conjunto de datos:
+
+Pregunta: "Mesa de Selección, el proceso está totalmente direccionado para las bombas XL Pum de AbbottQuifatex, tanto
+así, que ni siquiera se han tomado la molestia de camuflar un poco el tema y lo quehan hecho en la descripción de las ?
+ESPECIFICACIONES DE LA BOMBA? es realmente impresentable, hanhecho un vulgar COPY PAGE donde inclusive se describe las
+capacidades del ?PLUMSET? NOMBRECOMERCIAL DEL EQUIPO DE INFUSION PARA BOMBA XL PLUM DE ABBOTT, deben permitir la
+participación detodos los validos oferentes con bombas peristálticas o dar de baja el proceso, de no hacerlodeberán
+atenerse a las demandas y denuncias pertinentes"
+Etiqueta: 1
+Razón: Acusa direccionamiento total y copia de especificaciones para favorecer una marca concreta.
+
+Pregunta: "Estimados Señores CELEC Señores comisión técnica se solicita aclarar lo siguiente?1.- Cual es elmotivo de
+compra de repuestos para una maquina tan antigua y que esta descontinuada.2.- Es necesarioampliar el tiempo de entrega ya
+que como indique anteriormente son repuestos para una maquinadescontinuada y seria para fabricación y el tiempo que nos
+indica la fabrica es demasiado extenso yen 30 días es imposible cumplir.3.- Con el presupuesto asignado a esta compra de
+repuestos se puedeadquirir una maquina nueva con garantía de fábrica de su funcionamiento, mejor tecnología y quese
+ajuste a las necesidades actuales.Con esta compra de repuestos están perjudicando a losintereses nacionales por lo cual
+se denota que es un proceso direccionado debido al tiempo deentrega tan corto."
+Etiqueta: 1
+Razón: Imputa perjuicio a los intereses nacionales y direccionamiento por el plazo de entrega.
+
+Pregunta: "Porque este proceso que bien puede ser MENOR CUANTIA, lo realizan como Subasta Inversa, ocasionandoque no se
+aplique lo determinado en las resoluciones del SERCOP, al respecto del equipo minimo,personal tecnico minimo y
+metodología, es claro que al revisar los TDR, se trata de una ejecucióny mejoramiento de Via, por tal motivo con esta
+irregularidad que se dá desde la faseprecontractual, lo que se piensa es que este proceso ya tiene dueño."
+Etiqueta: 1
+Razón: Imputa una irregularidad precontractual y sugiere que el proceso ya tiene dueño.
+
+Pregunta: "A qué se refiren con costo de compra y costo histórico?"
+Etiqueta: 0
+Razón: Es una solicitud de aclaración sobre términos usados en el proceso.
+
+Pregunta: "En el KIT DE CUENTOS, uds solicitan autores ecuatorianos, pero por la gran cantidad y variedad,pueden ser
+autores latinoamericanos incluyendo cllaro está los ecuatorianos?"
+Etiqueta: 0
+Razón: Es una consulta de equivalencia o ampliación sobre el requisito de autores.
+
+Pregunta: "17.No es adecuado dos lugares para la instalación del equipo, indicar si, aceptarían una solacapacitación e
+instalación?"
+Etiqueta: 0
+Razón: Solicita aclaración y posible ajuste sobre capacitación e instalación.
+
+Pregunta: "Podemos visitar las instalaciones para una mejor comprension del proyecto?"
+Etiqueta: 0
+Razón: Es una solicitud operativa para visitar las instalaciones.
+
+Pregunta: "En el ítem 3 solicitan inserto bisagra rotatoria constreñida, favor especificar que el inserto esun implante
+del sistema y la bisagra rotatoria constreñida es otro implante del sistema, y no comoesta en las especificaciones que se
+podría tomar como un solo implante"
+Etiqueta: 0
+Razón: Solicita aclaración técnica sobre la interpretación de un ítem.
+
+Regla de decisión:
+Si el texto es primordialmente una solicitud para cambiar, aclarar, ampliar o justificar un requisito, etiqueta 0.
+Solo etiqueta 1 si alega claramente injusticia, ilegalidad, favoritismo, direccionamiento, manipulación, información privilegiada o exclusión deliberada por parte de la entidad o del proceso.
+
+Devuelve solo JSON:
+{
+"label": 0 o 1,
+"reason": "explicación breve"
+}
