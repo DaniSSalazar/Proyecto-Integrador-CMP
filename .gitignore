@@ -1,0 +1,46 @@
+# =============================================================================
+# Política del repositorio
+# =============================================================================
+# Este repositorio versiona únicamente el código fuente de la tesis, ubicado
+# en el directorio src/. Los datos, embeddings, modelos pre-entrenados,
+# documentos finales y bundles de envío se mantienen fuera del control de
+# versiones.
+#
+# Para incluir algo nuevo en la raíz, agrégalo explícitamente a la lista de
+# excepciones que aparece abajo.
+# =============================================================================
+
+# Ignorar todo lo que esté en la raíz por defecto
+/*
+
+# Excepciones (lo único que se versiona en la raíz)
+!/.gitignore
+!/src/
+
+# =============================================================================
+# Reglas que aplican en cualquier subdirectorio (incluido src/)
+# =============================================================================
+
+# Secretos (el archivo .env.example sí se versiona; estas reglas matchean
+# solamente los archivos literales .env, .env.local, .env.<nombre>.local)
+**/.env
+**/.env.local
+**/.env.*.local
+
+# Python
+**/__pycache__/
+**/*.py[cod]
+**/*.so
+**/*.egg-info/
+**/.venv/
+**/venv/
+
+# Jupyter
+**/.ipynb_checkpoints/
+
+# Lockfiles de Office / temporales del sistema operativo
+**/~$*
+**/*.tmp
+**/.DS_Store
+**/Thumbs.db
+**/desktop.ini

@@ -10,7 +10,7 @@ Este directorio contiene el código fuente de la tesis. El trabajo se construye 
 
 Cada etapa del proyecto vive en una subcarpeta de `src/`. Se ejecutan en este orden:
 
-### [1] `Extracción_Datos_Kapak_y_embeddings/`
+### [1] `Extraccion_Datos_Kapak_y_embeddings/`
 Extrae preguntas SIE 2021 desde Kapak (PostgreSQL) y genera sus embeddings con `text-embedding-3-large`.
 
 - **Entradas:** base Kapak + `OPENAI_API_KEY`
@@ -25,13 +25,13 @@ Reproduce los tres modelos seleccionados con sus hiperparámetros finales y vali
 - **Entradas:** `Archivos_NB / RF / LR / RF_aug` + `test_embeddings_*.csv`
 - **Salidas:** métricas en consola (no persiste archivos)
 
-### [3] `Experimentación_Diseño_Índice/`
+### [3] `Experimentacion_Diseno_Indice/`
 Diseña y compara distintas familias de índices de riesgo por proceso a partir de los embeddings de la etapa 1. Aquí también se calculan los pesos del Brier score para `ID_prob_weighted`.
 
 - **Entradas:** `embeddings_2021_*.csv` + `Archivos_NB / RF / LR / RF_aug`
 - **Salidas:** `output/2021/indices_per_process.csv` (7 índices `ID_*`)
 
-### [4] `Evaluación_LLM_as_a_Judge/`
+### [4] `Evaluacion_LLM_as_a_Judge/`
 Calibra un LLM como juez sustituto del juez humano (iteración sobre 15 prompts) y compara los 7 índices `ID_*` contra el LLM-juez sobre 400 procesos aleatorios de 2021. Selecciona el mejor índice.
 
 - **Entradas:**
@@ -48,7 +48,7 @@ Calibra un LLM como juez sustituto del juez humano (iteración sobre 15 prompts)
 
 ## Contenido por carpeta
 
-### `src/Extracción_Datos_Kapak_y_embeddings/`
+### `src/Extraccion_Datos_Kapak_y_embeddings/`
 
 **Propósito:** extraer las preguntas SIE 2021 desde la base Kapak (PostgreSQL) y convertirlas en embeddings utilizables por los modelos.
 
@@ -71,7 +71,7 @@ Calibra un LLM como juez sustituto del juez humano (iteración sobre 15 prompts)
 
 ---
 
-### `src/Experimentación_Diseño_Índice/`
+### `src/Experimentacion_Diseno_Indice/`
 
 **Propósito:** explorar y diseñar la familia de índices de riesgo por proceso. Los notebooks evolucionan desde el primer pipeline end-to-end (NB+RF+LR con 8 índices `IC_*`) hasta la versión final con 7 índices `ID_*` y RF aumentado.
 
@@ -111,7 +111,7 @@ Calibra un LLM como juez sustituto del juez humano (iteración sobre 15 prompts)
 
 ---
 
-### `src/Evaluación_LLM_as_a_Judge/`
+### `src/Evaluacion_LLM_as_a_Judge/`
 
 **Propósito:** validar los índices producidos en la etapa 2 usando un LLM calibrado como juez sustituto del juez humano, y elegir el mejor índice.
 
@@ -138,9 +138,9 @@ Estos archivos viven en la raíz de `src/` pero **NO** forman parte del flujo fi
 
 - **`Proyecto_Final_MMIA_FRoh.ipynb`** — Proyecto final de Francisco Roh (USFQ MMAI, diciembre 2024). Es el baseline del que parte esta tesis: dataset, embeddings y modelos base. Se conserva como referencia bibliográfica.
 
-- **`modelos_probabilidades.ipynb`** — Versión anterior; la versión vigente está en `Experimentación_Diseño_Índice/`.
+- **`modelos_probabilidades.ipynb`** — Versión anterior; la versión vigente está en `Experimentacion_Diseno_Indice/`.
 
-- **`kapak_extract_embeddings.py`** — Versión anterior; la vigente está en `Extracción_Datos_Kapak_y_embeddings/`.
+- **`kapak_extract_embeddings.py`** — Versión anterior; la vigente está en `Extraccion_Datos_Kapak_y_embeddings/`.
 
 - **`kapak_extract_process_labels.py`** — Genera etiquetas acusatorio/no acusatorio a nivel proceso desde Kapak. Salida: `output/kapak_sie_process_accusatory_labels.csv`.
 
