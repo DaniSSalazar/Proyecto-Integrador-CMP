@@ -152,7 +152,3 @@ Nota: la gran mayoría de los archivos de entrada y salida son bastante pesados 
 - `dataset.csv` (5.005 preguntas etiquetadas humanas) para la etapa 4.
 - `OPENAI_API_KEY` con acceso a `text-embedding-3-large` y al modelo de razonamiento usado como juez.
 
-## Enlace a OneDrive con archivos adicionales
-https://drive.google.com/drive/folders/1FPDbaRFvxjlCcb68B6mf9dvM68Pus9m9?usp=drive_link
-
-Este link contiene archivos utilizados o generados durante este Proyecto Integrador. Principalmente se contiene archivos .csv de los datasets utilizados, embeddings para training y test de los modelos, embeddings generado, etc. 
