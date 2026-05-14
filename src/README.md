@@ -1,4 +1,4 @@
-# Proyecto Integrador — Diseño e implementación de un índice de riesgo de corrupción basado en preguntas acusatorias del portal de contratación pública ecuatoriano para procesos de Subasta Inversa Electrónica
+# Proyecto Integrador — Diseño de un índice de señales textuales basado en preguntas de proveedores en procesos de Subasta Inversa Electrónica del Sistema Oficial de Contratación Pública del Ecuador (SOCE) mediante Machine Learning y NLP
 
 > SOCE / Subasta Inversa Electrónica (SIE)
 
