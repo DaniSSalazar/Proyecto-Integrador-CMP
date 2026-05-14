@@ -1,36 +1,91 @@
-1.`kapak_extract_embeddings.py`
+ src/Extraccion_Datos_Kapak_y_embeddings
 
-- **Propósito:** Extrae preguntas-respuestas de la base PostgreSQL del proyecto Kapak (SIE) para subasta inversa, genera embeddings con `text-embedding-3-large` de OpenAI, y persiste todo en CSV/JSONL.
-- **Entradas:**
-  - Base PostgreSQL Kapak SIE (credenciales en `.env`: `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`) 
-  - `OPENAI_API_KEY` en `.env` 
-- **Salidas:**
-  - `output/kapak_sie_questions_raw.csv`
-  - `output/kapak_sie_questions_embeddings.jsonl`
-  - `output/kapak_sie_embeddings_matrix_text_embedding_3_large.csv`
-  - `embedding_cache_text-embedding-3-large.jsonl`
+Esta carpeta corresponde a la sección METODOLOGÍA → Comprensión y preparación de datos del documento final. Su función es producir el universo de preguntas del SOCE 2021 ya vectorizado con text-embedding-3-large, listo para alimentar los notebooks de las fases posteriores (results_2021_v2.ipynb e indices_and_distributions_2021.ipynb). El pipeline final usa dos scripts secuenciales (extracción → embeddings). Un tercer script más antiguo, kapak_extract_embeddings.py, se conserva como referencia histórica del primer experimento.
 
-Este código fue realizado como primera prueba de extracción de preguntas desde la base de datos de Kapak y de la transformación a embeddings.
-Posteriormente, tomo en consideración que Roh tomó preguntas para los datasets de entrenamiento de los modelos de este año (2022).
-Por ende, se tómo el año 2021 y se cambió la forma de extracción a primero obtener las preguntas de la base de datos, guardar este resultado y luego transformarlos.
 
-2.`kapak_extract_questions_2021.py`
+  1. kapak_extract_embeddings.py            [REFERENCIA HISTÓRICA — año 2022]
 
-    Extracción de todas las preguntas de Kapak pertenecientes al proceso SIE año 2021. Se guardaron todas las preguntas en un archivo llamado preguntas_2021.csv, y se incluyeron las siguientes columnas:
+  - Propósito: prueba inicial del flujo de extracción + embeddings en un solo paso, ejecutada sobre preguntas SIE del año 2022. Fue descartada del pipeline final por la razón que se explica al final de este archivo.
 
-    | Columna                                 | Significado                     |
-| --------------------------------------- | ------------------------------- |
-| `contract_id`                           | ID del proceso                  |
-| `codigo`                                | Código del proceso              |
-| `fecha_publicacion`                     | Fecha de publicación            |
-| `estado_del_proceso`                    | Estado del proceso contractual  |
-| `presupuesto_referencial_total_sin_iva` | Presupuesto referencial         |
-| `monto_contrato`                        | Monto del contrato              |
-| `monto_adjudicacion`                    | Monto adjudicado                |
-| `valor_preguntas`                       | Texto de la pregunta            |
-| `es_acusatoria`                         | `True` o `False` según el query |
-| `clasificacion`                         | `Acusatoria` o `No Acusatoria`  |
+  - Entradas:
+      - Base PostgreSQL Kapak SIE (credenciales en .env: DB_HOST, DB_PORT,
+        DB_NAME, DB_USER, DB_PASSWORD)
+      - OPENAI_API_KEY (en .env)
 
-3.`data_transformation_2021.py`
+  - Salidas (en output/):
+      - kapak_sie_questions_raw.csv
+      - kapak_sie_questions_embeddings.jsonl
+      - kapak_sie_embeddings_matrix_text_embedding_3_large.csv
+      - embedding_cache_text-embedding-3-large.jsonl
 
-Transforma las preguntas en el archivo preguntas_2021.csv a sus respectivos embeddings
+  - Notas:
+      - Hace todo (consulta SQL + llamadas a OpenAI) en una sola corrida, sin persistir un CSV intermedio de preguntas. Esto resultó frágil para reanudación y costoso 	de auditar.
+      - No se usa en el pipeline final; se mantiene en el repositorio como bitácora del primer experimento.
+
+  2. kapak_extract_questions_2021.py        [EXTRACCIÓN — paso 1]
+
+
+  - Propósito: extraer del esquema PostgreSQL de Kapak todas las preguntas SIE publicadas durante 2021, junto con la metadata estructural del proceso, y guardarlas en 	un único CSV. La extracción y la generación de embeddings se separan en dos scripts para que la consulta a base se ejecute una sola vez y la vectorización 	posterior pueda reanudarse sin recargar la base.
+
+  - Entradas:
+      - Base PostgreSQL Kapak SIE (credenciales en .env)
+
+  - Salidas:
+      - preguntas_2021.csv  (en la raíz del proyecto)
+
+        Columnas:
+          contract_id                              ID del proceso contractual
+          codigo                                   Código del proceso
+          fecha_publicacion                        Fecha de publicación
+          estado_del_proceso                       Estado del proceso
+          presupuesto_referencial_total_sin_iva    Presupuesto referencial
+          monto_contrato                           Monto del contrato
+          monto_adjudicacion                       Monto adjudicado
+          valor_preguntas                          Texto de la pregunta
+          es_acusatoria                            True / False (regla Kapak)
+          clasificacion                            'Acusatoria' / 'No Acusatoria'
+
+  - Notas:
+      - La etiqueta es_acusatoria se calcula en SQL con un to_tsquery sobre el texto de la pregunta usando las 8 palabras/raíces que define el Indicador 4 de Kapak: 	corrupción, direccionado, limitante, vulneración, ocultamiento, violación, incompleto, trato justo.
+      - Estas etiquetas son la línea base "Kapak" que después se compara contra el LLM y contra los índices ID_* en la sección de Resultados de la tesis.
+      - El script no genera embeddings; eso lo hace data_transformation_2021.py.
+
+
+  3. data_transformation_2021.py            [GENERACIÓN DE EMBEDDINGS — paso 2]
+
+  - Propósito: tomar preguntas_2021.csv, limpiarlo (descarta filas vacías o sin fecha), y generar el embedding text-embedding-3-large (3072 dimensiones) de cada 	pregunta. La salida se escribe en chunks CSV configurables para permitir reanudación y evitar problemas de memoria.
+
+  - Entradas:
+      - preguntas_2021.csv  (producido por kapak_extract_questions_2021.py)
+      - OPENAI_API_KEY (en .env)
+
+  - Salidas (en output/2021/):
+      - preguntas_2021_prepared.csv
+            Versión limpia de preguntas_2021.csv con índice estable; sirve como referencia para mapear cada embedding a su pregunta original.
+      - embeddings_2021_<start>_<end>.csv (uno por chunk)
+            Cada archivo contiene 3072 columnas de embedding más el índice de
+            fila. Para la corrida completa de 134.294 preguntas se generaron
+            ~7 archivos cuando se usó --output-chunk-size 20000:
+                embeddings_2021_000000_020000.csv
+                embeddings_2021_020000_040000.csv
+                ...
+                embeddings_2021_120000_134294.csv
+
+  - Notas:
+      - Arquitectura del script:
+          · ThreadPoolExecutor con --max-workers (default 8) para paralelizar las llamadas al endpoint de embeddings sin exceder el rate limit de OpenAI.
+          · Tamaño de batch en cada llamada controlado por --api-batch-size (default 256 textos por request).
+          · Salida persistida cada --output-chunk-size filas (default 5000; en la corrida final del proyecto se usó 20000).
+          · Reintentos automáticos hasta MAX_RETRIES=6 con backoff exponencial ante errores de la API.
+      - Reanudación: el script lee --start-idx y --end-idx, lo que permite ejecutar la corrida en bloques y retomarla si se interrumpe. Si un chunk ya existe en 	output/2021/ se salta.
+      - Ejemplo de invocación usada en este proyecto:
+            python data_transformation_2021.py \
+                --start-idx 0 --end-idx 20000 --output-chunk-size 20000
+        La corrida completa se ejecutó en 7 bloques de 20.000 filas para cubrir las 134.294 preguntas.
+      - Las credenciales se cargan desde .env en la raíz del proyecto o desde
+        Codes/.env (el script prueba ambos en ese orden).
+
+
+  Por qué se cambió de 2022 a 2021
+
+	El primer experimento (kapak_extract_embeddings.py) trabajó sobre el rango 2022. Posteriormente se identificó que Roh (2024) había utilizado preguntas de ese 	mismo año para construir parte de sus conjuntos de entrenamiento. En consecuencia, evaluar los índices ID_* sobre 2022 corría el riesgo de introducir data 	leakage entre los datos de entrenamiento de los modelos clásicos y el universo de procesos sobre el que se calculaban los índices. Para mitigar este riesgo, el 	pipeline final se trasladó al año 2021, que no estaba presente en los datasets de entrenamiento de Roh. Esto exigió separar la extracción y la vectorización en 	dos scripts independientes (kapak_extract_questions_2021.py + data_transformation_2021.py) y conservar el archivo de 2022 únicamente como referencia histórica.

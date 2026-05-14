@@ -40,4 +40,117 @@
 
     Es el notebook end-to-end donde se realizaron los primeros experimentos para esta tesis: limpieza → embeddings (NB+RF+LR) → 8 índices de riesgo → comparación
     temporal con la etiqueta Kapak. Los results_2021.ipynb y results_2021_v2.ipynb son versiones posteriores que se quedaron
-    con la parte de cómputo de índices. 
+    con la parte de cómputo de índices.  
+
+  src/Experimentacion_Diseno_Indice
+
+  Esta carpeta corresponde a la sección METODOLOGÍA → Modelado → Diseño de los índices a nivel de proceso del documento final. Los notebooks se presentan en orden cronológico para mostrar la evolución metodológica que llevó a la familia final de 7 índices ID_*. El notebook que produce los índices que entran al análisis final de la tesis es results_2021_v2.ipynb.
+
+
+  1. indices_and_distributions_2021.ipynb   [PRIMERA ETAPA — end-to-end]
+
+
+  - Propósito: pipeline completo de la primera etapa exploratoria. Va desde la limpieza de preguntas_2021.csv y la generación de embeddings, hasta el cálculo de 8 índices iniciales por proceso y un análisis temporal frente a la etiqueta Kapak. Es el origen conceptual de la familia de índices, pero varias decisiones tomadas aquí fueron revisadas en etapas posteriores.
+
+  - Entradas:
+      - preguntas_2021.csv (preguntas SIE 2021 extraídas de la base Kapak)
+      - OPENAI_API_KEY (para generar embeddings text-embedding-3-large)
+      - Archivos_Naive_Bayes/, Archivos_Random_Forest/,
+        Archivos_Logistic_Regression/  (datasets de entrenamiento)
+
+  - Salidas (en output/2021/):
+      - sie_2021_embeddings_chunk_<start>_<end>.csv (embeddings por bloques)
+      - sie_2021_question_probabilities.csv (probabilidades por pregunta)
+      - sie_2021_process_indices.csv (los 8 índices IC_M1..IC_M4 por proceso)
+      - sie_2021_process_labels.csv (densidad Kapak por proceso)
+      - daily/ y weekly/ (CSV + PNG de distribuciones temporales)
+
+  - Notas:
+      - Usa los tres modelos Naive Bayes + Random Forest + Logistic Regression.
+      - La familia de índices construida aquí es IC_*, no ID_*:
+          · IC_M1_nb / IC_M1_rf / IC_M1_lr  — media de probabilidades por proceso.
+          · IC_M2_nb / IC_M2_rf / IC_M2_lr  — Noisy-OR por proceso, 1 − Π(1 − p).
+          · IC_M3                            — media del soft vote ponderado
+                                               (W_LR·p_lr + W_RF·p_rf + W_NB·p_nb)
+                                               promediado por proceso.
+          · IC_M4                            — Noisy-OR de ese soft vote ponderado.
+      - Los pesos del soft vote usados aquí son W_LR ≈ 0.55, W_RF ≈ 0.40,
+        W_NB ≈ 0.05. Estos pesos provienen de modelos_probabilidades.ipynb.
+
+
+  2. modelos_probabilidades.ipynb            [EXPLORACIÓN + PESOS BRIER]
+
+  - Propósito: explora distintas estrategias de agregación de probabilidades por proceso (media, máximo, top-K, percentil 90, densidad) sobre los tres  modelos seleccionados, y calcula los pesos de calibración basados en Brier score que después se usan en el índice ponderado ID_prob_weighted.
+
+  - Entradas:
+      - Archivos_Naive_Bayes/train_embeddings_balanced_AUG_GPT4o_mini_total_augmented_text-embedding-3-large.csv
+      - Archivos_Random_Forest/train_embeddings_balanced_total_sentence_prompt_GPT4o_mini_text-embedding-3-large.csv
+      - Archivos_Logistic_Regression/train_embeddings_balanced_total_sinonimos_text-embedding-3-large.csv
+      - Archivos_Random_Forest_1/train_embeddings_total_augmented_data_text-embedding-3-large.csv (RF aumentado)
+      - test_embeddings_text-embedding-3-large.csv
+
+  - Salidas: ninguna persistida en disco. El resultado clave son los pesos Brier
+    que se reportan en consola y se hardcodean en results_2021_v2.ipynb.
+
+  - Notas:
+      - Aquí se calculan los pesos finales que usa ID_prob_weighted:
+          · W_LR ≈ 0.5478
+          · W_RF ≈ 0.3998
+          · W_RF_AUG ≈ 0.0524
+      - Importante: a diferencia de indices_and_distributions_2021.ipynb (que pondera con W_NB), esta versión usa W_RF_AUG en lugar de W_NB. El  cambio refleja la decisión metodológica de descartar Naive Bayes (ver sección "Selección de modelos" de la tesis) y reemplazarlo por el Random Forest entrenado sobre datos aumentados.
+
+
+  3. results_2021_v1.ipynb                   [SEGUNDA ETAPA — descartada]
+
+  - Propósito: primera reescritura limpia del cálculo de índices por proceso. Mantiene el mismo esqueleto que results_2021_v2 (entrena modelos sobre Archivos_*, recorre los embeddings_2021_*.csv por chunks, agrega por contract_id y vuelca a output/2021/indices_per_process.csv), pero todavía no incorpora Random Forest aumentado.
+
+  - Entradas:
+      - Archivos_Random_Forest/, Archivos_Logistic_Regression/
+      - output/2021/embeddings_2021_*.csv (producidos en la fase de extracción)
+
+  - Salidas: output/2021/indices_per_process.csv con 5 índices IC_*.
+
+  - Notas:
+      - Usa solamente 2 modelos: Random Forest y Logistic Regression. Se descartó
+        Naive Bayes en esta iteración porque sobre embeddings de 3072 dimensiones
+        altamente correlacionados violaba el supuesto de independencia condicional
+        y producía probabilidades saturadas en 0 o 1.
+      - Familia de índices producida:
+          · IC_M1_rf, IC_M1_lr   — media de probabilidades por proceso.
+          · IC_M2_rf, IC_M2_lr   — Noisy-OR por proceso, 1 − Π(1 − p).
+          · IC_M3                — media del soft vote ponderado (W_LR·p_lr + W_RF·p_rf).
+          · IC_M4                — Noisy-OR de ese soft vote ponderado.
+          · IC_M5_density        — porcentaje de preguntas con voto binario
+                                   ponderado ≥ 0.5.
+      - Esta versión fue descartada porque eliminar Naive Bayes implicaba perder
+        el perfil de alta sensibilidad. La solución final (v2) fue reintroducir
+        ese perfil mediante el Random Forest aumentado.
+
+
+  4. results_2021_v2.ipynb                   [VERSIÓN FINAL — la que usa la tesis]
+
+
+  - Propósito: reescritura definitiva del cálculo de índices por proceso. Es la versión cuyo output (indices_per_process.csv con 7 columnas ID_*) alimenta toda la sección de Resultados de la tesis y todo el notebook llm_as_a_judge.
+
+  - Entradas:
+      - Archivos_Random_Forest/, Archivos_Random_Forest_1/ (RF aumentado),
+        Archivos_Logistic_Regression/
+      - output/2021/embeddings_2021_*.csv
+
+  - Salidas: output/2021/indices_per_process.csv con 7 columnas ID_*.
+
+  - Notas:
+      - Usa 3 modelos: Random Forest, Random Forest aumentado y Logistic
+        Regression. Naive Bayes queda descartado de forma definitiva.
+      - Familia final de índices que entra al análisis de la tesis:
+          · ID_bin_rf, ID_bin_rf_aug, ID_bin_lr
+                porcentaje de preguntas clasificadas como acusatorias por la versión binaria de cada modelo.
+          · ID_prob_rf, ID_prob_rf_aug, ID_prob_lr
+                media de las probabilidades de las preguntas por proceso.
+          · ID_prob_weighted
+                W_LR_NORM·ID_prob_lr + W_RF_NORM·ID_prob_rf + W_RF_AUG_NORM·ID_prob_rf_aug
+                (los pesos normalizados provienen del Brier score calculado en
+                modelos_probabilidades.ipynb).
+      - Respecto a v1 los cambios clave son: (1) sustituye los esquemas Noisy-OR y soft vote pre-agregación por una sola combinación ponderada post-agregación, y (2) reincorpora un tercer modelo (RF aumentado) para recuperar el perfil de alta sensibilidad que se perdió al descartar   Naive Bayes.
+
+ 

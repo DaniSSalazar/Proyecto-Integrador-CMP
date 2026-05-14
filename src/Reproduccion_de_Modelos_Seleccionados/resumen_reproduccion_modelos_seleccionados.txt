@@ -1,13 +1,95 @@
  Reproducción de modelos
 
- Propósito:Reproduce los tres modelos seleccionados con los hiperparámetros finales, validando métricas sobre el conjunto de test.
-- Entradas:
-  - `Archivos_Naive_Bayes/train_embeddings_balanced_AUG_GPT4o_mini_total_augmented_text-embedding-3-large.csv`
-  - `Archivos_Random_Forest/train_embeddings_balanced_total_sentence_prompt_GPT4o_mini_text-embedding-3-large.csv`
-  - `Archivos_Logistic_Regression/train_embeddings_balanced_total_sinonimos_text-embedding-3-large.csv`
-  - `Archivos_Random_Forest_1/train_embeddings_total_augmented_data_text-embedding-3-large.csv` (RF augmentado)
-  - `test_embeddings_text-embedding-3-large.csv`
-- Salidas: Solo métricas impresas en consola (no persiste nada en disco).
-Igualmente se probaron las alternativas de las versiones de los modelos basadas en probabilidad (no binarias).
+  src/Reproduccion_de_Modelos_Seleccionados
 
-* Importante: Los archivos tanto de entrenamiento como de test fueron obtenidos directamente del repositorio de trabajo de Francisco Roh
+Esta carpeta corresponde a la sección DESARROLLO Y RESULTADOS → Selección de modelos del documento final (Tablas 2 a 7). Su objetivo es reproducir los tres modelos seleccionados por Roh (2024) con los hiperparámetros finales reportados y verificar que las métricas obtenidas localmente coinciden razonablemente con las publicadas en su trabajo. Este paso es prerrequisito para todo lo que viene después: los mismos clasificadores se vuelven a entrenar dentro de results_2021_v2.ipynb (cálculo de los índices ID_*) y dentro de llm_as_a_judge.ipynb (calibración de umbrales y comparación frente al LLM).
+
+    reproduccion_modelos_seleccionados.ipynb
+
+	-Propósito: reproducir los tres perfiles de modelo seleccionados (Alta Sensibilidad, Alta Precisión, Equilibrado) y verificar que las métricas binarias y 	probabilísticas son consistentes con las reportadas por Roh (2024) sobre el conjunto de test del dataset etiquetado de 5005 preguntas.
+
+  - Entradas (todas NO versionadas — provienen del repositorio de Francisco Roh):
+      - Archivos_Naive_Bayes/train_embeddings_balanced_AUG_GPT4o_mini_total_augmented_text-embedding-3-large.csv
+      - Archivos_Random_Forest/train_embeddings_balanced_total_sentence_prompt_GPT4o_mini_text-embedding-3-large.csv
+      - Archivos_Random_Forest_1/train_embeddings_total_augmented_data_text-embedding-3-large.csv  (RF aumentado)
+      - Archivos_Logistic_Regression/train_embeddings_balanced_total_sinonimos_text-embedding-3-large.csv
+      - test_embeddings_text-embedding-3-large.csv
+
+  - Salidas: ninguna persistida en disco. El notebook imprime classification_report y confusion_matrix en consola para cada modelo. Las métricas reproducidas son las que aparecen en las Tablas 3, 5 y 7 de la tesis.
+
+  - Métricas reportadas para cada modelo (binarias): precision, recall, F1-score, accuracy, AUC-ROC y matriz de confusión
+      completa (TP, FP, FN, TN). Además se evalúan las salidas probabilísticas (predict_proba) de cada modelo para validar que su distribución es razonable de cara a 	la construcción de los índices ID_prob_* posteriores.
+
+
+  Detalle por perfil
+  
+  Perfil 1 — Alta Sensibilidad  (minimiza falsos negativos)
+      Modelo:        Random Forest
+      Dataset:       Consolidated Data Augmentation (sin GPT-4o mini v2)
+      Hiperparáms.:  max_depth=None, min_samples_leaf=1, n_estimators=200
+      Métrica clave: Recall (Roh reportó 0.9655 con FN=1)
+      Reproducción:  métricas muy parecidas pero NO idénticas.
+
+	Observación: Roh (2024) no documentó random_state para este modelo, por lo que cada ejecución del bosque produce particiones internas distintas. La tesis 	(Tabla 3) reconoce explícitamente esto: "para este perfil no se tenía el valor del parámetro random_state. Por ende, no se pudo replicar enteramente este 	modelo, aunque se obtienen métricas muy parecidas".
+
+
+  Perfil 2 — Alta Precisión  (minimiza falsos positivos)
+      Modelo:        Random Forest
+      Dataset:       Balanced 4
+      Hiperparáms.:  max_depth=None, min_samples_leaf=1, n_estimators=200,
+                     random_state=42, n_jobs=1   (random_state y n_jobs añadidos
+                                                  en este notebook para
+                                                  reproducibilidad)
+      Métrica clave: Precision (Roh reportó 0.7619 con FP=5)
+      Reproducción:  diferencia menor: TP baja en 1 (15 vs 16) y FP baja en 1
+                     (4 vs 5); FN y TN se ajustan en consecuencia.
+
+      Observación: la variación es favorable al perfil porque reduce un falso positivo, lo que es congruente con el objetivo del perfil (Tabla 5).
+
+
+  Perfil 3 — Equilibrado  (trade-off entre FP y FN)
+      Modelo:        Logistic Regression
+      Dataset:       Balanced 4
+      Hiperparáms.:  C=100, penalty='l2', solver='saga', max_iter=1000
+      Métrica clave: F1-Score (Roh reportó 0.6769)
+      Reproducción:  FP baja de 14 a 12 (los 2 procesos se reclasifican como TN,
+                     pasando TN de 958 a 960). Precision sube de 0.6111 a 0.6470
+                     y F1 sube a 0.6984 (Tabla 7).
+
+      Observación: la regresión logística es determinista bajo solver='saga' con max_iter suficientemente alto, por lo que la pequeña variación frente a Roh probablemente se debe a diferencias de versión de scikit-learn o de semilla de inicialización interna del solver.
+
+
+  Modelo adicional incluido en el notebook
+  
+  Naive Bayes (Gaussiano)  — NO forma parte de los tres perfiles finales
+      Configuración: GaussianNB(var_smoothing=0.35111917342151305)
+      Dataset:       Archivos_Naive_Bayes/...AUG_GPT4o_mini_total_augmented...
+
+	Aparece en el notebook como verificación inicial, pero fue descartado para la construcción de los índices porque sobre embeddings de 3072 dimensiones altamente 	correlacionados viola el supuesto de independencia condicional, generando distribuciones probabilísticas saturadas (cercanas a 0 o 1) que arruinan la 	calibración necesaria para ID_prob_*. La decisión se discute en la sección "Selección de modelos" de la tesis.
+
+
+  Nota sobre reproducibilidad
+  
+Las pequeñas diferencias frente a las métricas reportadas por Roh (2024) son esperables porque ese trabajo no preservó los modelos serializados en disco (no hay archivos .pkl ni .ckpt) y la mayoría de los entrenamientos no fijaron random_state. Cuando un hiperparámetro de aleatoriedad faltaba en la documentación original, este notebook lo dejó en su valor por defecto de scikit-learn (o lo fijó en 42 cuando convenía para tener al menos una corrida determinista). Las métricas reproducidas se mantienen dentro de un margen estrecho y no alteran el ordenamiento relativo de los perfiles.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
