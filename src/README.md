@@ -46,6 +46,8 @@ Calibra un LLM como juez sustituto del juez humano (iteración sobre 15 prompts)
 
 ---
 
+Nota: la gran mayoría de los archivos de entrada y salida son bastante pesados (MB o incluso GB). Por ende, se decidió excluirlos de este repositorio
+
 ## Contenido por carpeta
 
 ### `src/Extraccion_Datos_Kapak_y_embeddings/`
