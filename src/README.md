@@ -2,7 +2,7 @@
 
 > SOCE / Subasta Inversa Electrónica (SIE)
 
-Este directorio contiene el código fuente de la tesis. El trabajo se construye sobre el proyecto base de Francisco Roh (modelos NB, RF y LR entrenados sobre embeddings de OpenAI `text-embedding-3-large`) y extiende su uso a preguntas SIE 2021 extraídas de la base Kapak, define una familia de índices de riesgo por proceso, y los evalúa frente a un juez humano y a un juez LLM (GPT con prompt 15).
+Este directorio contiene el código fuente de la tesis. El trabajo se construye sobre el proyecto base de Francisco Roh (modelos NB, RF y LR entrenados sobre embeddings de OpenAI `text-embedding-3-large`) y extiende su uso a preguntas SIE 2021 extraídas de la base Kapak, define una familia de índices de riesgo por proceso, y los evalúa frente a un juez humano y a un juez LLM (gpt-5-mini con prompt 15).
 
 ---
 
