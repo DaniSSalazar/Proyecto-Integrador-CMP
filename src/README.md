@@ -132,25 +132,6 @@ Calibra un LLM como juez sustituto del juez humano (iteración sobre 15 prompts)
 
 ---
 
-## Archivos sueltos en `src/` (legacy / referencia)
-
-Estos archivos viven en la raíz de `src/` pero **NO** forman parte del flujo final. Se mantienen como referencia o trabajo previo:
-
-- **`Proyecto_Final_MMIA_FRoh.ipynb`** — Proyecto final de Francisco Roh (USFQ MMAI, diciembre 2024). Es el baseline del que parte esta tesis: dataset, embeddings y modelos base. Se conserva como referencia bibliográfica.
-
-- **`modelos_probabilidades.ipynb`** — Versión anterior; la versión vigente está en `Experimentacion_Diseno_Indice/`.
-
-- **`kapak_extract_embeddings.py`** — Versión anterior; la vigente está en `Extraccion_Datos_Kapak_y_embeddings/`.
-
-- **`kapak_extract_process_labels.py`** — Genera etiquetas acusatorio/no acusatorio a nivel proceso desde Kapak. Salida: `output/kapak_sie_process_accusatory_labels.csv`.
-
-- **`kapak_real_process_indices.py`** / **`kapak_real_process_indices.ipynb`** — Pipeline end-to-end alternativo que entrena NB+RF+LR y produce índices por proceso real (sin fusión). Predecesor del flujo `results_2021_v2`.
-
-- **`kapak_audit_process_coverage.py`** — Audita cobertura de procesos seleccionados vs procesos con preguntas válidas. Salida: `output/kapak_sie_process_audit_coverage.csv`.
-
-- **`indice.ipynb`** — Notebook vacío (placeholder).
-
----
 
 ## Configuración
 
