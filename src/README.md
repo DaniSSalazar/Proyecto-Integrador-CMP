@@ -122,11 +122,10 @@ Nota: la gran mayoría de los archivos de entrada y salida son bastante pesados 
   2. Calibración del prompt LLM-juez (prompt 15 activo). Reporta confusion matrix, F1/precision/recall vs etiqueta humana sobre `alignment_set_val`.
   3. Genera predicciones de los 7 índices `ID_*` sobre el test set 20%.
   4. Genera embeddings `text-embedding-3-large` del test set.
-  5. Selecciona el mejor modelo con un `selection_score` que pondera F1, recall y AP vs humano (90%) y F1 vs LLM (10%).
-  6. Aplica el LLM-juez a 400 procesos aleatorios de 2021 y calcula `llm_densidad` por proceso.
-  7. Compara distribuciones LLM vs cada índice (KS, Wasserstein, Jensen-Shannon, histogramas y ECDFs).
-  8. Compara ordenamientos (Spearman, Kendall, Pearson, top-K overlap `k=10, 20, 50, 100`).
-  9. Tablas finales y búsqueda de mejor threshold para índices probabilísticos.
+  5. Aplica el LLM-juez a 400 procesos aleatorios de 2021 y calcula `llm_densidad` por proceso. 
+  6. Compara distribuciones LLM vs cada índice (KS, Wasserstein, Jensen-Shannon, histogramas y ECDFs).
+  7. Compara ordenamientos (Spearman, Kendall, Pearson, top-K overlap `k=10, 20, 50, 100`).
+  8. Tablas finales y búsqueda de mejor threshold para índices probabilísticos.
 
 - **`Prompts/`** — Historial de los 15 prompts iterados durante la calibración del juez (`prompt1.txt` … `prompt15.txt`). El prompt 15 es el activo y vive embebido en `llm_as_a_judge.ipynb`; los `.txt` sirven como bitácora del proceso de alineación de prompt.
 
