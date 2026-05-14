@@ -154,4 +154,5 @@ Nota: la gran mayoría de los archivos de entrada y salida son bastante pesados 
 
 ## Enlace a OneDrive con archivos adicionales
 https://drive.google.com/drive/folders/1FPDbaRFvxjlCcb68B6mf9dvM68Pus9m9?usp=drive_link
+
 Este link contiene archivos utilizados o generados durante este Proyecto Integrador. Principalmente se contiene archivos .csv de los datasets utilizados, embeddings para training y test de los modelos, embeddings generado, etc. 
